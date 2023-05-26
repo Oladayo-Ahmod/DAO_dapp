@@ -1,4 +1,4 @@
-// SPDX-License-Identifier : MIT
+// SPDX-License-Identifier : UNLICENSED
 pragma solidity ^0.8.9;
 
 
@@ -54,6 +54,7 @@ contract Dao is AccessControl,ReentrancyGuard {
         _;
     }
 
+    // proposal creation
     function createProposal (
         string calldata title,
         string calldata description,
@@ -77,5 +78,14 @@ contract Dao is AccessControl,ReentrancyGuard {
             amount
         );
         return StakeholderProposal;
+    }
+
+    // voting
+    function performVote(uint256 proposalId,bool chosen) external 
+    stakeholderOnly("Only stakeholders can perform voting")
+    returns(Voted memory)
+    {
+        Proposals storage StakeholderProposal = raisedProposals[proposalId];
+        
     }
 }
