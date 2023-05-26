@@ -93,6 +93,20 @@ contract Dao is AccessControl,ReentrancyGuard {
         stakeholderVotes[msg.sender].push(
             StakeholderProposal.id
         );
+        votedOn[StakeholderProposal.id].push(
+            Voted(
+                msg.sender,
+                block.timestamp,
+                chosen                
+            )
+        );
+
+        return Voted(
+            msg.sender,
+            block.timestamp,
+            chosen
+        );
+
     }
 
     // handling vote
