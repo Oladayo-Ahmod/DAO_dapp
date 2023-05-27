@@ -124,6 +124,11 @@ contract Dao is AccessControl,ReentrancyGuard {
     }
 
     // pay beneficiary
-    function payBeneficiary() external 
-    stakeholderOnly("Only stakeholders can make payment")
+    function payBeneficiary(uint proposalId) external 
+    stakeholderOnly("Only stakeholders can make payment") nonReentrant() returns(uint256){
+        Proposals storage stakeholderProposal = raisedProposals[proposalId];
+        if(stakeholderProposal.passed == true) revert("payment already made");
+        
+
+    }
 }
