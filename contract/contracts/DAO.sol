@@ -122,4 +122,8 @@ contract Dao is AccessControl,ReentrancyGuard {
         }
                 
     }
+
+    // pay beneficiary
+    function payBeneficiary() external 
+    stakeholderOnly("Only stakeholders can make payment")
 }
