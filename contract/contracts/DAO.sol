@@ -53,6 +53,10 @@ contract Dao is AccessControl,ReentrancyGuard {
         require(hasRole(STAKEHOLDER_ROLE,msg.sender),message);
         _;
     }
+    modifier contributorOnly(string memory message){
+        require(hasRole(COLLABORATOR_ROLE,msg.sender),message);
+        _;
+    }
 
     // proposal creation
     function createProposal (
@@ -225,6 +229,11 @@ contract Dao is AccessControl,ReentrancyGuard {
         return stakeholders[msg.sender] > 0;
     }
 
+    // check if contributor
+    function isContributor() external view returns(bool){
+        return contributors[msg.sender] > 0;
+    }
     
+
 
 }
