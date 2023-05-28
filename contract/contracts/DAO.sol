@@ -233,6 +233,11 @@ contract Dao is AccessControl,ReentrancyGuard {
     function isContributor() external view returns(bool){
         return contributors[msg.sender] > 0;
     }
+
+    // check contributors balance
+    function getContributorsBalance() contributorOnly("unathorized") external view returns(uint256){
+        return contributors[msg.sender];
+    }
     
 
 
