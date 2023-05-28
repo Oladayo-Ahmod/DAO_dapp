@@ -9,7 +9,7 @@ contract Dao is AccessControl,ReentrancyGuard {
     uint256 totalProposals;
     uint256 balance;
 
-    uint256 immutable COLLABORATOR_MIN_CONTRIBUTION = 1 ether;
+    uint256 immutable STAKEHOLDER_MIN_CONTRIBUTION = 1 ether;
     uint256 immutable MIN_VOTE_PERIOD = 2 minutes;
     bytes32 private immutable COLLABORATOR_ROLE = keccak256("collaborator");  
     bytes32 private immutable STAKEHOLDER_ROLE = keccak256("stakeholder");    
@@ -156,5 +156,17 @@ contract Dao is AccessControl,ReentrancyGuard {
         return true;
     }
 
-    
+    function contribute() payable external returns(uint256){
+        require(msg.value > 0 ether, "invalid amount");
+        if (!hasRole(STAKEHOLDER_ROLE, msg.sender)) {
+            uint256 totalContributions = contributors[msg.sender] + msg.value;
+
+            if (totalContributions >= STAKEHOLDER_MIN_CONTRIBUTION) {
+                stakeholders[msg.sender] = msg.value;
+                contributors[msg.sender] += msg.value;
+                _setupRole(STAKEHOLDER_ROLE,msg.sender);
+                _setupRole(COLLABORATOR_ROLE, msg.sender);
+            }
+        }
+    }
 }
