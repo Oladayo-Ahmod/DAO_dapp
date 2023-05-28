@@ -20,7 +20,7 @@ contract Dao is AccessControl,ReentrancyGuard {
     mapping(address => uint256) private contributors;
     mapping(address => uint256) private stakeholders;
 
-    event ProposalCreated(
+    event ProposalAction(
         address indexed creator,
         bytes32 role,
         string message,
@@ -70,7 +70,7 @@ contract Dao is AccessControl,ReentrancyGuard {
         StakeholderProposal.beneficiary = payable(beneficiary);
         StakeholderProposal.duration = block.timestamp + MIN_VOTE_PERIOD;
 
-        emit ProposalCreated(
+        emit ProposalAction(
             msg.sender,
             STAKEHOLDER_ROLE,          
             'Proposal Raised',
@@ -134,8 +134,19 @@ contract Dao is AccessControl,ReentrancyGuard {
         pay(stakeholderProposal.amount,stakeholderProposal.beneficiary);
         stakeholderProposal.paid = true;
         stakeholderProposal.executor = msg.sender;
-        
-        
+        balance -= stakeholderProposal.amount;
+
+
+        emit ProposalAction(
+            msg.sender,
+            STAKEHOLDER_ROLE,
+            "PAYMENT SUCCESSFULLY MADE!",
+            stakeholderProposal.beneficiary,
+            stakeholderProposal.amount
+        );
+
+        return balance;
+
     }
 
     // paymment functionality
@@ -143,6 +154,7 @@ contract Dao is AccessControl,ReentrancyGuard {
         (bool success,) = payable(to).call{value : amount}("");
         require(success, "payment failed");
         return true;
-
     }
+
+    
 }
