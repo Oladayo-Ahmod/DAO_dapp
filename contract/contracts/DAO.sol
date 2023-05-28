@@ -156,6 +156,7 @@ contract Dao is AccessControl,ReentrancyGuard {
         return true;
     }
 
+    // contribution functionality
     function contribute() payable external returns(uint256){
         require(msg.value > 0 ether, "invalid amount");
         if (!hasRole(STAKEHOLDER_ROLE, msg.sender)) {
@@ -188,4 +189,10 @@ contract Dao is AccessControl,ReentrancyGuard {
 
         return balance;
     }
+
+    // get single proposal
+    function getProposals(uint256 proposalID) external view returns(Proposals memory) {
+        return raisedProposals[proposalID];
+    }
+
 }
