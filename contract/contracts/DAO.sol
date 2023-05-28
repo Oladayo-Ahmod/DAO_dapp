@@ -220,6 +220,11 @@ contract Dao is AccessControl,ReentrancyGuard {
 
     }
 
+    // check if stakeholder
+    function stakeholderStatus() external view returns(bool){
+        return stakeholders[msg.sender] > 0;
+    }
+
     
 
 }
