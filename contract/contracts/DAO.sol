@@ -195,4 +195,12 @@ contract Dao is AccessControl,ReentrancyGuard {
         return raisedProposals[proposalID];
     }
 
+    // get all proposals
+    function getAllProposals() external view returns(Proposals[] memory props){
+        props = new Proposals[](totalProposals);
+        for (uint i = 0; i < totalProposals; i++) {
+            props[i] = raisedProposals[i];
+        }
+        
+    }
 }
