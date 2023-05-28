@@ -209,10 +209,10 @@ contract Dao is AccessControl,ReentrancyGuard {
         return votedOn[proposalID];
     }
 
-    // get stakeholder votes
-    function getStakeholderVotes() stakeholderOnly("Unauthorized") external view returns(uint256[] memory){
+    // get stakeholders votes
+    function getStakeholdersVotes() stakeholderOnly("Unauthorized") external view returns(uint256[] memory){
         return stakeholderVotes[msg.sender];
     }   
 
-    
+
 }
