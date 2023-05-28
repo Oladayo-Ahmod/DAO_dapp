@@ -127,8 +127,22 @@ contract Dao is AccessControl,ReentrancyGuard {
     function payBeneficiary(uint proposalId) external 
     stakeholderOnly("Only stakeholders can make payment") nonReentrant() returns(uint256){
         Proposals storage stakeholderProposal = raisedProposals[proposalId];
-        if(stakeholderProposal.passed == true) revert("payment already made");
+        require(balance >= stakeholderProposal.amount, "insufficient fund");
+        if(stakeholderProposal.paid == true) revert("payment already made");
+        if(stakeholderProposal.upVote <= stakeholderProposal.downVotes) revert("insufficient votes");
+
+        pay(stakeholderProposal.amount,stakeholderProposal.beneficiary);
+        stakeholderProposal.paid = true;
+        stakeholderProposal.executor = msg.sender;
         
+        
+    }
+
+    // paymment functionality
+    function pay(uint256 amount,address to) internal returns(bool){
+        (bool success,) = payable(to).call{value : amount}("");
+        require(success, "payment failed");
+        return true;
 
     }
 }
