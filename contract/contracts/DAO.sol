@@ -167,6 +167,10 @@ contract Dao is AccessControl,ReentrancyGuard {
                 _setupRole(STAKEHOLDER_ROLE,msg.sender);
                 _setupRole(COLLABORATOR_ROLE, msg.sender);
             }
+            else {
+                contributors[msg.sender] += msg.value;
+                _setupRole(COLLABORATOR_ROLE,msg.sender);
+            }
         }
     }
 }
