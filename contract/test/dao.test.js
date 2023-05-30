@@ -1,5 +1,5 @@
 const {ethers} = require('hardhat')
-const {assert,expect} = require('chai')
+const {assert,expect, AssertionError} = require('chai')
 
 describe("DAO",()=>{
     let provider,dao
@@ -17,14 +17,17 @@ describe("DAO",()=>{
         console.log(contract.address)
     })
 
-    it("contributes", async()=>{
+    it("stakeholder contributes", async()=>{
+        let price = new ethers.utils.parseEther('2');
+        await dao.contribute({value:price})
+        let balance = await dao.getStakeholdersBalances();
+        assert.equal(balance,price.toString())
+    })
+
+     it("collaborator contributes", async()=>{
         let price = new ethers.utils.parseEther('0.5');
-        let contrbutor2 = await ethers.getSigner(2)
-        //  await dao.contribute({value:price})
-        // console.log(test);
-        await dao.connect(contrbutor2).contribute({value:price})
-        // await dao.connect(contrbutor3).contribute({value:price})
-        let balance = await dao.connect(contrbutor2).getContributorsBalance();
-        console.log(balance);
+        await dao.contribute({value:price})
+        let balance = await dao.getContributorsBalance();
+       assert.equal(balance,price.toString())
     })
 })
