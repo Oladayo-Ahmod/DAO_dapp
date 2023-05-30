@@ -30,4 +30,15 @@ describe("DAO",()=>{
         let balance = await dao.getContributorsBalance();
        assert.equal(balance,price.toString())
     })
+
+    it("creates proposal", async()=>{
+        let beneficiary = await ethers.getSigner('3')
+        let price = new ethers.utils.parseEther('2');
+        let amount = new ethers.utils.parseEther('10');
+        await dao.contribute({value:price})
+        let proposal = await dao.createProposal('title','desc',beneficiary,amount)
+        console.log(await proposal);
+    })
+
+    // it()
 })
