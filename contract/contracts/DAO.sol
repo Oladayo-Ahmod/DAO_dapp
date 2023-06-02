@@ -33,6 +33,8 @@ contract Dao is AccessControl,ReentrancyGuard {
         string message,
         address indexed beneficiary,
         uint256 amount,
+        uint256 upVote,
+        uint256 downVotes,
         bool chosen
     );
 
@@ -119,6 +121,8 @@ contract Dao is AccessControl,ReentrancyGuard {
             "PROPOSAL VOTE",
             StakeholderProposal.beneficiary,
             StakeholderProposal.amount,
+            StakeholderProposal.upVote,
+            StakeholderProposal.downVotes,
             chosen
         );
 
