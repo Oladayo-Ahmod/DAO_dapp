@@ -53,6 +53,8 @@ describe("DAO",()=>{
         await DAO.contribute({value:price})
         await DAO.createProposal('title','desc',beneficiary.address,amount)
         let vote = await DAO.performVote(0,true)
-        console.log(vote);
+        const events = await vote.wait().then((result)=>{
+            return result.find((event)=> event.event == '')
+        })
     })
 })
