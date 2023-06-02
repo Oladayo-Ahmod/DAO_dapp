@@ -105,6 +105,14 @@ contract Dao is AccessControl,ReentrancyGuard {
             )
         );
 
+        emit ProposalAction(
+            msg.sender,
+            STAKEHOLDER_ROLE,
+            "PROPOSAL VOTE",
+            StakeholderProposal.beneficiary,
+            StakeholderProposal.amount
+        );
+
         return Voted(
             msg.sender,
             block.timestamp,
