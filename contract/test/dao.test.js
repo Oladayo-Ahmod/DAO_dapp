@@ -59,6 +59,8 @@ describe("DAO",()=>{
             })
     
             expect(events.args[5]).to.equal(true)
+            expect(events.args[4]).to.equal(amount)
+            expect(events.args[3]).to.equal(beneficiary.address)
         })
 
         it("performs downvote", async()=>{
