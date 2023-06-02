@@ -32,12 +32,16 @@ describe("DAO",()=>{
     })
 
     it("creates proposal", async()=>{
-        let beneficiary = await ethers.getSigner('3')
+        let [,beneficiary] = await ethers.getSigners()
         let price = new ethers.utils.parseEther('2');
         let amount = new ethers.utils.parseEther('10');
         await dao.contribute({value:price})
-        let proposal = await dao.createProposal('title','desc',beneficiary,amount)
-        console.log(await proposal);
+        let proposal = await dao.createProposal('title','desc',beneficiary.address,amount)
+        const event = await proposal.wait().then((result) =>{
+           return result.events.find((event) => event.event == 'ProposalAction')
+        })
+
+        assert.equal(event.args[2],'Proposal Raised')
     })
 
     // it()
