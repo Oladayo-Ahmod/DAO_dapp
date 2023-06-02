@@ -42,6 +42,8 @@ describe("DAO",()=>{
         })
 
         assert.equal(event.args[2],'Proposal Raised')
+        assert.equal(event.args[3],beneficiary.address)
+        assert.equal(event.args[4],amount)
     })
 
     // it()
