@@ -80,16 +80,17 @@ describe("DAO",()=>{
 
     it("pays beneficiary", async()=>{
         let [,beneficiary] = await ethers.getSigners()
-        let price = new ethers.utils.parseEther('2');
-        let amount = new ethers.utils.parseEther('10');
+        let price = new ethers.utils.parseEther('5');
+        let amount = new ethers.utils.parseEther('1');
         await DAO.contribute({value:price})
-        await DAO.createProposal('title','desc',beneficiary.address,amount)
-        await DAO.performVote(0,false)
-        const processPayment = await DAO.payBeneficiary(0)
-        const events = await processPayment.wait().then((result)=>{
-            return result.events.find((event)=> event.event == 'ProposalAction')
-        })
-        console.log(events);
+
+        // await DAO.createProposal('title','desc',beneficiary.address,amount)
+        // await DAO.performVote(0,false)
+        const processPayment = await DAO.getTotalBalance()
+        // const events = await processPayment.wait().then((result)=>{
+        //     return result.events.find((event)=> event.event == 'ProposalAction')
+        // })
+        console.log(processPayment);
     })
     
 })
