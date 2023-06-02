@@ -58,7 +58,7 @@ describe("DAO",()=>{
                 return result.events.find((event)=> event.event == 'VoteAction')
             })
     
-            expect(events.args[5]).to.equal(true)
+            expect(events.args[7]).to.equal(true)
             expect(events.args[4]).to.equal(amount)
             expect(events.args[3]).to.equal(beneficiary.address)
         })
@@ -74,25 +74,30 @@ describe("DAO",()=>{
                 return result.events.find((event)=> event.event == 'VoteAction')
             })
     
-            expect(events.args[5]).to.equal(false)
+            expect(events.args[7]).to.equal(false)
+            expect(events.args[4]).to.equal(amount)
+            expect(events.args[3]).to.equal(beneficiary.address)
         })
     })
 
     it("pays beneficiary", async()=>{
-        let [,beneficiary] = await ethers.getSigners()
+        let [,beneficiary,stakeholder] = await ethers.getSigners()
         let price = new ethers.utils.parseEther('5');
         let amount = new ethers.utils.parseEther('1');
         await DAO.contribute({value:price})
+        await DAO.connect(stakeholder).contribute({value:price})
         await DAO.createProposal('title','desc',beneficiary.address,amount)
-        await DAO.performVote(0,false)
-        const previousBalance = await DAO.getTotalBalance()
-        const processPayment = await DAO.payBeneficiary(0)
-        let currentBalance = await DAO.getTotalBalance()
-        currentBalance = previousBalance.toString() - currentBalance.toString()
-        const events = await processPayment.wait().then((result)=>{
-            return result.events.find((event)=> event.event == 'ProposalAction')
+        await DAO.performVote(0,true)
+        const state = await DAO.connect(stakeholder).performVote(0,true)
+        // const state = await DAO.
+        // const previousBalance = await DAO.getTotalBalance()
+        // const processPayment = await DAO.payBeneficiary(1)
+        // let currentBalance = await DAO.getTotalBalance()
+        // currentBalance = previousBalance.toString() - currentBalance.toString()
+        const events = await state.wait().then((result)=>{
+            return result.events.find((event)=> event.event == 'VoteAction')
         })
-        console.log(currentBalance);
+        console.log(events);
     })
     
 })
