@@ -2,14 +2,14 @@ const {ethers} = require('hardhat')
 const {assert,expect, AssertionError} = require('chai')
 
 describe("DAO",()=>{
-    let provider,dao
+    let provider,DAO
     beforeEach(async ()=>{
         provider = await ethers.getContractFactory("Dao")
-        dao = await provider.deploy()
+        DAO = await provider.deploy()
     })
 
     it("deploys contract", async()=>{
-        let contract =  await dao.deployed()
+        let contract =  await DAO.deployed()
         assert.notEqual(contract,'')
         assert.notEqual(contract,null)
         assert.notEqual(contract,undefined)
@@ -19,15 +19,15 @@ describe("DAO",()=>{
 
     it("stakeholder contributes", async()=>{
         let price = new ethers.utils.parseEther('2');
-        await dao.contribute({value:price})
-        let balance = await dao.getStakeholdersBalances();
+        await DAO.contribute({value:price})
+        let balance = await DAO.getStakeholdersBalances();
         assert.equal(balance,price.toString())
     })
 
      it("collaborator contributes", async()=>{
         let price = new ethers.utils.parseEther('0.5');
-        await dao.contribute({value:price})
-        let balance = await dao.getContributorsBalance();
+        await DAO.contribute({value:price})
+        let balance = await DAO.getContributorsBalance();
        assert.equal(balance,price.toString())
     })
 
@@ -35,16 +35,24 @@ describe("DAO",()=>{
         let [,beneficiary] = await ethers.getSigners()
         let price = new ethers.utils.parseEther('2');
         let amount = new ethers.utils.parseEther('10');
-        await dao.contribute({value:price})
-        let proposal = await dao.createProposal('title','desc',beneficiary.address,amount)
+        await DAO.contribute({value:price})
+        let proposal = await DAO.createProposal('title','desc',beneficiary.address,amount)
         const event = await proposal.wait().then((result) =>{
            return result.events.find((event) => event.event == 'ProposalAction')
         })
 
         assert.equal(event.args[2],'Proposal Raised')
         assert.equal(event.args[3],beneficiary.address)
-        assert.equal(event.args[4],amount)
+        assert.equal(event.args[4],amount.toString())
     })
 
-    // it()
+    it("performs voting", async()=>{
+        let [,beneficiary] = await ethers.getSigners()
+        let price = new ethers.utils.parseEther('2');
+        let amount = new ethers.utils.parseEther('10');
+        await DAO.contribute({value:price})
+        await DAO.createProposal('title','desc',beneficiary.address,amount)
+        let vote = await DAO.performVote(0,true)
+        console.log(vote);
+    })
 })
