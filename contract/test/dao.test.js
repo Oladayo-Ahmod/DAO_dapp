@@ -83,14 +83,16 @@ describe("DAO",()=>{
         let price = new ethers.utils.parseEther('5');
         let amount = new ethers.utils.parseEther('1');
         await DAO.contribute({value:price})
-
-        // await DAO.createProposal('title','desc',beneficiary.address,amount)
-        // await DAO.performVote(0,false)
-        const processPayment = await DAO.getTotalBalance()
-        // const events = await processPayment.wait().then((result)=>{
-        //     return result.events.find((event)=> event.event == 'ProposalAction')
-        // })
-        console.log(processPayment);
+        await DAO.createProposal('title','desc',beneficiary.address,amount)
+        await DAO.performVote(0,false)
+        const previousBalance = await DAO.getTotalBalance()
+        const processPayment = await DAO.payBeneficiary(0)
+        let currentBalance = await DAO.getTotalBalance()
+        currentBalance = previousBalance.toString() - currentBalance.toString()
+        const events = await processPayment.wait().then((result)=>{
+            return result.events.find((event)=> event.event == 'ProposalAction')
+        })
+        console.log(currentBalance);
     })
     
 })
