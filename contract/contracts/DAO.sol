@@ -199,6 +199,7 @@ contract Dao is AccessControl,ReentrancyGuard {
             contributors[msg.sender] += msg.value;
         }
 
+        balance += msg.value;
         emit ProposalAction(
             msg.sender,
             STAKEHOLDER_ROLE,
@@ -238,6 +239,12 @@ contract Dao is AccessControl,ReentrancyGuard {
     // get stakeholders balances
     function getStakeholdersBalances() stakeholderOnly("unauthorized") external view returns(uint256){
         return stakeholders[msg.sender];
+
+    }
+
+     // get total balances
+    function getTotalBalance() external view returns(uint256){
+        return balance;
 
     }
 
