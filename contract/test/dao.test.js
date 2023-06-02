@@ -46,17 +46,34 @@ describe("DAO",()=>{
         assert.equal(event.args[4],amount.toString())
     })
 
-    it("performs voting", async()=>{
-        let [,beneficiary] = await ethers.getSigners()
-        let price = new ethers.utils.parseEther('2');
-        let amount = new ethers.utils.parseEther('10');
-        await DAO.contribute({value:price})
-        await DAO.createProposal('title','desc',beneficiary.address,amount)
-        let vote = await DAO.performVote(0,true)
-        const events = await vote.wait().then((result)=>{
-            return result.events.find((event)=> event.event == 'VoteAction')
+    describe("voting",()=>{
+        it("performs upvote", async()=>{
+            let [,beneficiary] = await ethers.getSigners()
+            let price = new ethers.utils.parseEther('2');
+            let amount = new ethers.utils.parseEther('10');
+            await DAO.contribute({value:price})
+            await DAO.createProposal('title','desc',beneficiary.address,amount)
+            let vote = await DAO.performVote(0,true)
+            const events = await vote.wait().then((result)=>{
+                return result.events.find((event)=> event.event == 'VoteAction')
+            })
+    
+            expect(events.args[5]).to.equal(true)
         })
 
-        expect(events.args[5]).to.equal(true)
+        it("performs downvote", async()=>{
+            let [,beneficiary] = await ethers.getSigners()
+            let price = new ethers.utils.parseEther('2');
+            let amount = new ethers.utils.parseEther('10');
+            await DAO.contribute({value:price})
+            await DAO.createProposal('title','desc',beneficiary.address,amount)
+            let vote = await DAO.performVote(0,false)
+            const events = await vote.wait().then((result)=>{
+                return result.events.find((event)=> event.event == 'VoteAction')
+            })
+    
+            expect(events.args[5]).to.equal(false)
+        })
     })
+    
 })
