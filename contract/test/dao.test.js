@@ -54,7 +54,9 @@ describe("DAO",()=>{
         await DAO.createProposal('title','desc',beneficiary.address,amount)
         let vote = await DAO.performVote(0,true)
         const events = await vote.wait().then((result)=>{
-            return result.find((event)=> event.event == '')
+            return result.find((event)=> event.event == 'PROPOSAL VOTE')
         })
+
+        expect(events.args[])
     })
 })

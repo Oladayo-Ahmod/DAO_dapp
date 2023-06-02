@@ -27,6 +27,14 @@ contract Dao is AccessControl,ReentrancyGuard {
         address indexed beneficiary,
         uint256 amount
     );
+    event VoteAction(
+        address indexed creator,
+        bytes32 role,
+        string message,
+        address indexed beneficiary,
+        uint256 amount,
+        bool chosen
+    );
 
     struct Proposals {
         uint256 id;
@@ -105,12 +113,13 @@ contract Dao is AccessControl,ReentrancyGuard {
             )
         );
 
-        emit ProposalAction(
+        emit VoteAction(
             msg.sender,
             STAKEHOLDER_ROLE,
             "PROPOSAL VOTE",
             StakeholderProposal.beneficiary,
-            StakeholderProposal.amount
+            StakeholderProposal.amount,
+            chosen
         );
 
         return Voted(
