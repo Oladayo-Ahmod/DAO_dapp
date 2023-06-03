@@ -94,16 +94,18 @@ describe("DAO",()=>{
         await DAO.getTotalBalance().then((result)=>{
         previousBalance = result
         })
-        await DAO.payBeneficiary(0)
+        const processPayment = await DAO.payBeneficiary(0)
+        const events = await processPayment.wait().then((result)=>{
+            return result.events.find((event)=> event.event == 'ProposalAction')
+        })
+
+        assert.equal(events.args[3],beneficiary.address)
         await DAO.getTotalBalance().then((result)=>{
             currentBalance = result
         })
-        console.log({prev : previousBalance,cur:currentBalance});
-        // const events = await processPayment.wait().then((result)=>{
-        //     return result.events.find((event)=> event.event == 'ProposalAction')
-        // })
-    //     const balance = previousBalance.toString() - currentBalance.toString()
-    //     console.log(balance);
+        
+        assert.equal(previousBalance.toString(),'10000000000000000000')
+        assert.equal(currentBalance.toString(),'9000000000000000000')
     })
     
 })
