@@ -48,12 +48,25 @@ describe("DAO",()=>{
         })
 
         it("retrieves proposal", async ()=>{
-            let [,beneficiary] = await ethers.getSigners()
+            let [,beneficiary,beneficiary2] = await ethers.getSigners()
             let price = new ethers.utils.parseEther('2');
             let amount = new ethers.utils.parseEther('10');
             await DAO.contribute({value:price})
             await DAO.createProposal('title','desc',beneficiary.address,amount)
-            let proposal = await DAO.
+            await DAO.createProposal('title','desc',beneficiary2.address,amount)
+            let firstProposal = await DAO.getProposals(0)
+            let secondProposal = await DAO.getProposals(1)
+            expect(firstProposal.id.toString()).to.equal('0')
+            expect(secondProposal.id.toString()).to.equal('1')
+        })
+
+        it("retrieves all proposals", async()=>{
+            let [,beneficiary,beneficiary2] = await ethers.getSigners()
+            let price = new ethers.utils.parseEther('2');
+            let amount = new ethers.utils.parseEther('10');
+            await DAO.contribute({value:price})
+            await DAO.createProposal('title','desc',beneficiary.address,amount)
+            await DAO.createProposal('title','desc',beneficiary2.address,amount)
         })
     })
 
