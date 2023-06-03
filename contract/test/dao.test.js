@@ -81,6 +81,7 @@ describe("DAO",()=>{
     })
 
     it("pays beneficiary", async()=>{
+        let previousBalance,currentBalance
         let [,beneficiary,stakeholder] = await ethers.getSigners()
         let price = new ethers.utils.parseEther('5');
         let amount = new ethers.utils.parseEther('1');
@@ -88,16 +89,21 @@ describe("DAO",()=>{
         await DAO.connect(stakeholder).contribute({value:price})
         await DAO.createProposal('title','desc',beneficiary.address,amount)
         await DAO.performVote(0,true)
-        const state = await DAO.connect(stakeholder).performVote(0,true)
+        await DAO.connect(stakeholder).performVote(0,true)
         // const state = await DAO.
-        // const previousBalance = await DAO.getTotalBalance()
-        // const processPayment = await DAO.payBeneficiary(1)
-        // let currentBalance = await DAO.getTotalBalance()
-        // currentBalance = previousBalance.toString() - currentBalance.toString()
-        const events = await state.wait().then((result)=>{
-            return result.events.find((event)=> event.event == 'VoteAction')
+        await DAO.getTotalBalance().then((result)=>{
+        previousBalance = result
         })
-        console.log(events);
-    })
+        await DAO.payBeneficiary(0)
+        await DAO.getTotalBalance().then((result)=>{
+            currentBalance = result
+        })
+        console.log({prev : previousBalance,cur:currentBalance});
+        // const events = await processPayment.wait().then((result)=>{
+        //     return result.events.find((event)=> event.event == 'ProposalAction')
+        // })
+    //     const balance = previousBalance.toString() - currentBalance.toString()
+    //     console.log(balance);
+    // })
     
 })

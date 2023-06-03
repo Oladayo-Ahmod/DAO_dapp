@@ -161,7 +161,6 @@ contract Dao is AccessControl,ReentrancyGuard {
         stakeholderProposal.executor = msg.sender;
         balance -= stakeholderProposal.amount;
 
-
         emit ProposalAction(
             msg.sender,
             STAKEHOLDER_ROLE,
