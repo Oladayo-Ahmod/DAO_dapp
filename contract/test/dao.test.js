@@ -31,19 +31,30 @@ describe("DAO",()=>{
        assert.equal(balance,price.toString())
     })
 
-    it("creates proposal", async()=>{
-        let [,beneficiary] = await ethers.getSigners()
-        let price = new ethers.utils.parseEther('2');
-        let amount = new ethers.utils.parseEther('10');
-        await DAO.contribute({value:price})
-        let proposal = await DAO.createProposal('title','desc',beneficiary.address,amount)
-        const event = await proposal.wait().then((result) =>{
-           return result.events.find((event) => event.event == 'ProposalAction')
+    describe("proposal", ()=>{
+        it("creates proposal", async()=>{
+            let [,beneficiary] = await ethers.getSigners()
+            let price = new ethers.utils.parseEther('2');
+            let amount = new ethers.utils.parseEther('10');
+            await DAO.contribute({value:price})
+            let proposal = await DAO.createProposal('title','desc',beneficiary.address,amount)
+            const event = await proposal.wait().then((result) =>{
+               return result.events.find((event) => event.event == 'ProposalAction')
+            })
+    
+            assert.equal(event.args[2],'Proposal Raised')
+            assert.equal(event.args[3],beneficiary.address)
+            assert.equal(event.args[4],amount.toString())
         })
 
-        assert.equal(event.args[2],'Proposal Raised')
-        assert.equal(event.args[3],beneficiary.address)
-        assert.equal(event.args[4],amount.toString())
+        it("retrieves proposal", async ()=>{
+            let [,beneficiary] = await ethers.getSigners()
+            let price = new ethers.utils.parseEther('2');
+            let amount = new ethers.utils.parseEther('10');
+            await DAO.contribute({value:price})
+            await DAO.createProposal('title','desc',beneficiary.address,amount)
+            let proposal = await DAO.
+        })
     })
 
     describe("voting",()=>{
@@ -103,7 +114,7 @@ describe("DAO",()=>{
         await DAO.getTotalBalance().then((result)=>{
             currentBalance = result
         })
-        
+
         assert.equal(previousBalance.toString(),'10000000000000000000')
         assert.equal(currentBalance.toString(),'9000000000000000000')
     })
