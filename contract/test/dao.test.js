@@ -107,6 +107,16 @@ describe("DAO",()=>{
             expect(events.args[4]).to.equal(amount)
             expect(events.args[3]).to.equal(beneficiary.address)
         })
+        it("retrieves proposal vote", async ()=>{
+            let [,beneficiary,voter] = await ethers.getSigners()
+            let price = new ethers.utils.parseEther('2');
+            let amount = new ethers.utils.parseEther('10');
+            await DAO.connect(voter).contribute({value:price})
+            await DAO.connect(voter).createProposal('title','desc',beneficiary.address,amount)
+            await DAO.connect(voter).performVote(0,true)
+            let vote =  await DAO.getProposalVote(0)
+            assert.equal(vote[voter],voter.address)
+        })
     })
 
     it("pays beneficiary", async()=>{
