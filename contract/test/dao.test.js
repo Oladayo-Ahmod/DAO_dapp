@@ -67,7 +67,12 @@ describe("DAO",()=>{
             await DAO.contribute({value:price})
             await DAO.createProposal('title','desc',beneficiary.address,amount)
             await DAO.createProposal('title','desc',beneficiary2.address,amount)
+            let proposals = await DAO.getAllProposals()
+            const result = proposals.map((result)=> result)
+            expect(result[0].id).to.equal(0)
+            expect(result[1].id).to.equal(1)
         })
+
     })
 
     describe("voting",()=>{
