@@ -14,15 +14,24 @@ describe("DAO",()=>{
         assert.notEqual(contract,null)
         assert.notEqual(contract,undefined)
         assert.notEqual(contract,0x0)
-        console.log(contract.address)
     })
 
-    it("stakeholder contributes", async()=>{
-        let price = new ethers.utils.parseEther('2');
-        await DAO.contribute({value:price})
-        let balance = await DAO.getStakeholdersBalances();
-        assert.equal(balance,price.toString())
+    describe("stakeholders and contributors", ()=>{
+        it("stakeholder contributes and retrieves balance", async()=>{
+            let price = new ethers.utils.parseEther('2');
+            await DAO.contribute({value:price})
+            let balance = await DAO.getStakeholdersBalances();
+            assert.equal(balance,price.toString())
+        })
+
+        it("retrieves contributor balance", async()=>{
+            let price = new ethers.utils.parseEther('2');
+            await DAO.contribute({value:price})
+            let balance = await DAO.getContributorsBalance();
+            assert.equal(balance,price.toString())
+        })
     })
+    
 
      it("collaborator contributes", async()=>{
         let price = new ethers.utils.parseEther('0.5');
