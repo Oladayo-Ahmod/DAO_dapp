@@ -28,18 +28,26 @@ describe("DAO",()=>{
             let price = new ethers.utils.parseEther('1');
             await DAO.contribute({value:price})
             let balance = await DAO.getContributorsBalance();
-            console.log(balance);
-            // assert.equal(balance,price.toString())
+            assert.equal(balance,price.toString())
+        })
+
+        it("collaborator contributes", async()=>{
+            let price = new ethers.utils.parseEther('0.5');
+            await DAO.contribute({value:price})
+            let balance = await DAO.getContributorsBalance();
+           assert.equal(balance,price.toString())
+        })
+
+        it("checks stakeholder status", async()=>{
+            let price = new ethers.utils.parseEther('0.5');
+            await DAO.contribute({value:price})
+            let status = await DAO.stakeholderStatus()
+            assert(status,true)
         })
     })
     
 
-     it("collaborator contributes", async()=>{
-        let price = new ethers.utils.parseEther('0.5');
-        await DAO.contribute({value:price})
-        let balance = await DAO.getContributorsBalance();
-       assert.equal(balance,price.toString())
-    })
+   
 
     describe("proposal", ()=>{
         it("creates proposal", async()=>{
