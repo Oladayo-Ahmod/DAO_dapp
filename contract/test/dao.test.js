@@ -39,10 +39,14 @@ describe("DAO",()=>{
         })
 
         it("checks stakeholder status", async()=>{
+            let [,stakeholder] = await ethers.getSigners()
             let price = new ethers.utils.parseEther('0.5');
+            await DAO.connect(stakeholder).contribute({value : new ethers.utils.parseEther('2')})
             await DAO.contribute({value:price})
             let status = await DAO.stakeholderStatus()
-            assert(status,true)
+            let stakeholderStatus = await DAO.connect(stakeholder).stakeholderStatus()
+            assert.equal(status,false)
+            assert.equal(stakeholderStatus,true)
         })
     })
     
