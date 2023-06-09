@@ -32,7 +32,22 @@ export default function Home() {
                   </form>
               </div>
           </nav>
-          <h1>some stuff</h1>
+          <div className='container mt-5'>
+            <div className='row justify-content-center align-items-center'>
+              <div className='col col-md-3'>
+                  <p>Opened Proposals : </p>
+              </div>
+              <div className='col col-md-3'>
+                  DAO Available Balance : 
+              </div>
+              <div className='col col-md-3'>
+                  Personal Contributions :
+              </div>
+              <div className='col col-md-3'>
+                Status : stakeholder
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </>
