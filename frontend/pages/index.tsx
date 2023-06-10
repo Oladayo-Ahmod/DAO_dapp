@@ -49,6 +49,110 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <section id="products" className="departments">
+      <div className="container">
+
+        <div className="section-title" data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="linear">
+          <h2>Proposals State</h2>
+          <p> Below shows different states of proposals.</p>
+        </div>
+
+        <div className="row">
+          <div className="col-lg-3">
+            <ul className="nav nav-tabs flex-column">
+              <li className="nav-item">
+                <a className="nav-link active show" data-toggle="tab" href="#tab-1">Extra Virgin Blackseed</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#tab-2">Extra Virgin Olive</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#tab-3">Garlic</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#tab-4">Pomegranate</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#tab-5">Clove</a>
+              </li>
+            </ul>
+          </div>
+          <div className="col-lg-9 mt-4 mt-lg-0">
+            <div className="tab-content">
+              <div className="tab-pane active show" id="tab-1">
+                <div className="row">
+                  <div className="col-lg-8 details order-2 order-lg-1">
+                    <h3>Blackseed</h3>
+                    <p className="font-italic">Blackseed (nigella sativa) also called black cumin, 
+                      black caraway, black onion seed contains some chemical compounds known as thymoquinone and caryophyllene.</p>
+                    <p>It has been used for medical cares since thousands of years back. It is good for medical Conditions
+                      such as <b>asthma, high blood pressure, diabetes, inflammation, eczema, flu, fever, headache, skin care.</b> etc.
+                       <i>We have it in form of powder, oil(virgin and extra virgin) and seed.</i>
+                    </p>
+                  </div>
+                  <div className="col-lg-4 text-center order-1 order-lg-2">
+                    {/* <Image src="assets/img/blackseed.jpeg" alt="" className="img-fluid"/> */}
+                  </div>
+                </div>
+              </div>
+              <div className="tab-pane" id="tab-2">
+                <div className="row">
+                  <div className="col-lg-8 details order-2 order-lg-1">
+                    <h3>Olive</h3>
+                    <p className="font-italic">Olive belongs to the group of fruits known as DRUPES.</p>
+                    <p>It is very high in vitamin E, fibre and other powerful antioxidants.
+                       It protects against osteoporosis and Cancer and also serves as pain reduction and apetite control.
+                        <i>Available in seeds, oil and powder.</i>
+                      </p>
+                  </div>
+                  <div className="col-lg-4 text-center order-1 order-lg-2">
+                    {/* <Image src="assets/img/olive.jpeg" alt="olive oil" className="img-fluid" /> */}
+                  </div>
+                </div>
+              </div>
+              <div className="tab-pane" id="tab-3">
+                <div className="row">
+                  <div className="col-lg-8 details order-2 order-lg-1">
+                    <h3>Garlic</h3>
+                    <p className="font-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
+                    <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et harum voluptatem optio quae</p>
+                  </div>
+                  <div className="col-lg-4 text-center order-1 order-lg-2">
+                    {/* <Image src="assets/img/garlic.jpeg" alt="garlic oil" className="img-fluid" /> */}
+                  </div>
+                </div>
+              </div>
+              <div className="tab-pane" id="tab-4">
+                <div className="row">
+                  <div className="col-lg-8 details order-2 order-lg-1">
+                    <h3>Pomegranate</h3>
+                    <p className="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
+                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
+                  </div>
+                  <div className="col-lg-4 text-center order-1 order-lg-2">
+                    {/* <Image src="assets/img/pomegranate.jpeg" alt="pomegranate oil" className="img-fluid" /> */}
+                  </div>
+                </div>
+              </div>
+              <div className="tab-pane" id="tab-5">
+                <div className="row">
+                  <div className="col-lg-8 details order-2 order-lg-1">
+                    <h3>Clove</h3>
+                    <p className="font-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
+                    <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
+                  </div>
+                  <div className="col-lg-4 text-center order-1 order-lg-2">
+                    {/* <Image src="assets/img/clove.jpeg" alt="clove oil" className="img-fluid" /> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
       </main>
     </>
   )
