@@ -62,20 +62,15 @@ export default function Home() {
           <div className="col-lg-3">
             <ul className="nav nav-tabs flex-column">
               <li className="nav-item">
-                <a className="nav-link active show" data-toggle="tab" href="#tab-1">Extra Virgin Blackseed</a>
+                <a className="nav-link active show" data-toggle="tab" href="#tab-1">All</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" data-toggle="tab" href="#tab-2">Extra Virgin Olive</a>
+                <a className="nav-link" data-toggle="tab" href="#tab-2">Opened</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" data-toggle="tab" href="#tab-3">Garlic</a>
+                <a className="nav-link" data-toggle="tab" href="#tab-3">Closed</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" data-toggle="tab" href="#tab-4">Pomegranate</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" data-toggle="tab" href="#tab-5">Clove</a>
-              </li>
+        
             </ul>
           </div>
           <div className="col-lg-9 mt-4 mt-lg-0">
@@ -123,30 +118,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="tab-pane" id="tab-4">
-                <div className="row">
-                  <div className="col-lg-8 details order-2 order-lg-1">
-                    <h3>Pomegranate</h3>
-                    <p className="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
-                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
-                  </div>
-                  <div className="col-lg-4 text-center order-1 order-lg-2">
-                    {/* <Image src="assets/img/pomegranate.jpeg" alt="pomegranate oil" className="img-fluid" /> */}
-                  </div>
-                </div>
-              </div>
-              <div className="tab-pane" id="tab-5">
-                <div className="row">
-                  <div className="col-lg-8 details order-2 order-lg-1">
-                    <h3>Clove</h3>
-                    <p className="font-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
-                    <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
-                  </div>
-                  <div className="col-lg-4 text-center order-1 order-lg-2">
-                    {/* <Image src="assets/img/clove.jpeg" alt="clove oil" className="img-fluid" /> */}
-                  </div>
-                </div>
-              </div>
+          
             </div>
           </div>
         </div>
