@@ -2,34 +2,39 @@ import Head from 'next/head'
 import Image from 'next/image'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Inter } from 'next/font/google'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+// import iso
 // import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
-const loadIsotope  =()=> require('isotope-layout')
-let Isotope;
+
+  const loadIsotope  =()=> require('isotope-layout')
+  let Isotope;
 
 export default function Home() {
-   // Ref of isotope container
-  const containerRef = useRef();
-
-  // Ref to store the isotope object
-  const isotopeRef = useRef();
-
+  // state for storing the isotope object, with an initial value of null
+  const [isotope, setIsotope] = useState(null);
+  // store the filter keyword in a state
+  const [filterKey, setFilterKey] = useState('*')
+  Isotope = loadIsotope()
+  // initialize an Isotope object with configs
   useEffect(() => {
-    // return if window doesn't exist (i.e. server side)
-    if (typeof window === 'undefined') return;
-
-    // load Isotope
-    Isotope = loadIsotope();
-
-    // use Isotope
-    isotopeRef.current = new Isotope(containerRef.current, {
-      itemSelector: '.my-item',
+    isotope.current = new Isotope('.filter-container', {
+      itemSelector: '.filter-item',
       layoutMode: 'fitRows',
-    });
-  },[])
+    })
+    // cleanup
+    return () => isotope.current.destroy()
+  }, [])
 
+  // handling filter key change
+  useEffect(() => {
+    filterKey === '*'
+      ? isotope.current.arrange({filter: `*`})
+      : isotope.current.arrange({filter: `.${filterKey}`})
+  }, [filterKey])
+
+  const handleFilterKeyChange = key => () => setFilterKey(key)
   return (
     <>
       <Head>
@@ -96,7 +101,8 @@ export default function Home() {
           <div className="col-lg-3">
             <ul className="nav nav-tabs flex-column">
               <li className="nav-item">
-                <a className="nav-link active show" data-toggle="tab" href="#tab-1">All</a>
+                <a className="nav-link active show"  href="#">All</a>
+                <button onClick={ loadIsotope()}>ts</button>
               </li>
               <li className="nav-item">
                 <a className="nav-link" data-toggle="tab" href="#tab-2">Opened</a>
@@ -108,7 +114,7 @@ export default function Home() {
             </ul>
           </div>
           <div className="col-lg-9 mt-4 mt-lg-0">
-            <div className="tab-content">
+            <div className="tab-content" >
               <div className="tab-pane active show" id="tab-1">
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">

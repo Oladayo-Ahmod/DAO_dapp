@@ -21,6 +21,7 @@
     "typescript": "5.0.3"
   },
   "devDependencies": {
+    "@types/isotope-layout": "^3.0.9",
     "isotope-layout": "^3.0.6"
   }
 }

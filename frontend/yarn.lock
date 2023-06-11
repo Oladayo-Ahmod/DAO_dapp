@@ -182,6 +182,11 @@
   dependencies:
     tslib "^2.4.0"
 
+"@types/isotope-layout@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@types/isotope-layout/-/isotope-layout-3.0.9.tgz#be66995aaf51917574093fa7964d00ebd76bc401"
+  integrity sha512-tLvSxfQu10f0M0YFIODdqtFz2Gr3NgEhkH6wTY4Gda9fPtLG4/60GWphHZj4PuxuGTjzaF4MMUog+a347gzzTw==
+
 "@types/json5@^0.0.29":
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
