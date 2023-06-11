@@ -7,18 +7,21 @@ import { useEffect, useRef, useState } from 'react'
 // import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
+let Isotope;
 
-  const loadIsotope  =()=> require('isotope-layout')
-  let Isotope;
+  
 
 export default function Home() {
+  
   // state for storing the isotope object, with an initial value of null
   const [isotope, setIsotope] = useState(null);
   // store the filter keyword in a state
   const [filterKey, setFilterKey] = useState('*')
-  Isotope = loadIsotope()
   // initialize an Isotope object with configs
   useEffect(() => {
+    if(typeof window === 'undefined') return;
+    const loadIsotope  =()=> require('isotope-layout')
+    Isotope = loadIsotope()
     isotope.current = new Isotope('.filter-container', {
       itemSelector: '.filter-item',
       layoutMode: 'fitRows',
@@ -102,7 +105,7 @@ export default function Home() {
             <ul className="nav nav-tabs flex-column">
               <li className="nav-item">
                 <a className="nav-link active show"  href="#">All</a>
-                <button onClick={ loadIsotope()}>ts</button>
+                <button>ts</button>
               </li>
               <li className="nav-item">
                 <a className="nav-link" data-toggle="tab" href="#tab-2">Opened</a>
