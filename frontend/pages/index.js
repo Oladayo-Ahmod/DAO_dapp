@@ -52,8 +52,14 @@ export default function Home() {
           `
             .title{
               color : #2c4964;
-              font-size : 26px;
               font-weight : 600;
+            }
+            .col-container{
+              width :200px;
+              height : 200px;
+              text-align : center;
+              margin :20px 20px;
+              padding : 20px 5px 0 5px;
             }
           `
         }
@@ -76,17 +82,21 @@ export default function Home() {
           </nav>     
           <div className='container mt-5'>
             <div className='row justify-content-center align-items-center'>
-              <div className='col col-md-3'>
-                  <h3 className='title' >Opened Proposals : </h3>
+              <div className='col col-md-3 bg-primary col-container rounded'>
+                  <h5 className='title' >Opened Proposals  </h5>
+                  <h4 className='text-white fw-bolder m-auto mt-5'>10</h4>
               </div>
-              <div className='col col-md-3'>
-                  <h3 className='title'> DAO Balance : </h3>
+              <div className='col col-md-3 col-container bg-info rounded'>
+                  <h5 className='title '> DAO Balance  </h5>
+                  <h4 className='text-white fw-bolder m-auto mt-5'>10</h4>
               </div>
-              <div className='col col-md-3'>
-                 <h3 className='title'> My Contributions :</h3>
+              <div className='col col-md-3 col-container bg-success rounded'>
+                 <h5 className='title'> My Contributions </h5>
+                 <h4 className='text-white fw-bolder m-auto mt-5'>10</h4>
               </div>
-              <div className='col col-md-3'>
-               <h3 className='title'>  Status : stakeholder</h3>
+              <div className='col col-md-3 col-container bg-warning rounded'>
+               <h5 className='title'>  Status</h5>
+               <h4 className='text-white fw-bolder m-auto mt-5'>Stakeholder</h4>
               </div>
             </div>
           </div>
