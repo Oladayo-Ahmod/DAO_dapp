@@ -73,29 +73,7 @@ export default function Home() {
                       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">connect wallet</button>
                   </form>
               </div>
-          </nav>
-          <>
-      <ul>
-        <li onClick={handleFilterKeyChange('*')}>Show Both</li>
-        <li onClick={handleFilterKeyChange('vege')}>Show Veges</li>
-        <li onClick={handleFilterKeyChange('fruit')}>Show Fruits</li>
-      </ul>
-      <hr />
-      {/* <ul className="filter-container">
-        <div className="filter-item vege">
-          <span>Cucumber</span>
-        </div>
-        <div className="filter-item fruit">
-          <span>Apple</span>
-        </div>
-        <div className="filter-item fruit">
-          <span>Orange</span>
-        </div>
-        <div className="filter-item fruit vege">
-          <span>Tomato</span>
-        </div>
-      </ul> */}
-    </>
+          </nav>     
           <div className='container mt-5'>
             <div className='row justify-content-center align-items-center'>
               <div className='col col-md-3'>
