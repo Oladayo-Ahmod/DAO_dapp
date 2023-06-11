@@ -19,6 +19,7 @@ export default function Home() {
   const [filterKey, setFilterKey] = useState('*')
   // initialize an Isotope object with configs
   useEffect(() => {
+    require('bootstrap/dist/js/bootstrap.bundle')
     if(typeof window === 'undefined') return;
     const loadIsotope  =()=> require('isotope-layout')
     Isotope = loadIsotope()
@@ -83,7 +84,29 @@ export default function Home() {
           <div className='container my-5'>
               <div className='d-flex justify-content-around'>
                 <div>
-                  <button className='btn btn-primary'>Contribute</button>
+                  <button type='button' data-bs-toggle="modal" data-bs-target="#modalId" className='btn btn-primary'>Contribute</button>
+                  
+                  {/* <!-- Modal Body --> */}
+                  <div className="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title" id="modalTitleId">Contribute</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                          <input className='form-control' placeholder='1ETH and above to be a stakeholder'/>
+                        </div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" className="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+               
                 </div>
                       <button className='btn btn-warning'>Propose</button>
               </div>
