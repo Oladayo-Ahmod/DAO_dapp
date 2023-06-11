@@ -78,8 +78,8 @@ export default function Home() {
               <div className="tab-pane active show" id="tab-1">
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">
-                    <h3>Blackseed</h3>
-                    <p className="font-italic">Blackseed (nigella sativa) also called black cumin, 
+                    <h3 className='title'>Blackseed</h3>
+                    <p className="font-italic description">Blackseed (nigella sativa) also called black cumin, 
                       black caraway, black onion seed contains some chemical compounds known as thymoquinone and caryophyllene.</p>
                     <p>It has been used for medical cares since thousands of years back. It is good for medical Conditions
                       such as <b>asthma, high blood pressure, diabetes, inflammation, eczema, flu, fever, headache, skin care.</b> etc.
@@ -87,7 +87,7 @@ export default function Home() {
                     </p>
                   </div>
                   <div className="col-lg-4 text-center order-1 order-lg-2">
-                    {/* <Image src="assets/img/blackseed.jpeg" alt="" className="img-fluid"/> */}
+                    <Image src="/thirteen.svg" width={200} height={200} alt="" className="img-fluid"/>
                   </div>
                 </div>
               </div>
