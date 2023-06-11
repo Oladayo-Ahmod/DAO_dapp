@@ -2,11 +2,34 @@ import Head from 'next/head'
 import Image from 'next/image'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Inter } from 'next/font/google'
+import { useEffect, useRef } from 'react'
 // import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
+const loadIsotope  =()=> require('isotope-layout')
+let Isotope;
 
 export default function Home() {
+   // Ref of isotope container
+  const containerRef = useRef();
+
+  // Ref to store the isotope object
+  const isotopeRef = useRef();
+
+  useEffect(() => {
+    // return if window doesn't exist (i.e. server side)
+    if (typeof window === 'undefined') return;
+
+    // load Isotope
+    Isotope = loadIsotope();
+
+    // use Isotope
+    isotopeRef.current = new Isotope(containerRef.current, {
+      itemSelector: '.my-item',
+      layoutMode: 'fitRows',
+    });
+  },[])
+
   return (
     <>
       <Head>
