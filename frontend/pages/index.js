@@ -79,7 +79,15 @@ export default function Home() {
                       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">connect wallet</button>
                   </form>
               </div>
-          </nav>     
+          </nav>
+          <div className='container my-5'>
+              <div className='d-flex justify-content-around'>
+                <div>
+                  <button className='btn btn-primary'>Contribute</button>
+                </div>
+                      <button className='btn btn-warning'>Propose</button>
+              </div>
+          </div>     
           <div className='container mt-5'>
             <div className='row justify-content-center align-items-center'>
               <div className='col col-md-3 bg-primary col-container rounded'>
