@@ -14,7 +14,7 @@ let Isotope;
 export default function Home() {
   
   // state for storing the isotope object, with an initial value of null
-  const [isotope, setIsotope] = useState(null);
+  const isotope = useRef();
   // store the filter keyword in a state
   const [filterKey, setFilterKey] = useState('*')
   // initialize an Isotope object with configs
@@ -74,6 +74,28 @@ export default function Home() {
                   </form>
               </div>
           </nav>
+          <>
+      <ul>
+        <li onClick={handleFilterKeyChange('*')}>Show Both</li>
+        <li onClick={handleFilterKeyChange('vege')}>Show Veges</li>
+        <li onClick={handleFilterKeyChange('fruit')}>Show Fruits</li>
+      </ul>
+      <hr />
+      {/* <ul className="filter-container">
+        <div className="filter-item vege">
+          <span>Cucumber</span>
+        </div>
+        <div className="filter-item fruit">
+          <span>Apple</span>
+        </div>
+        <div className="filter-item fruit">
+          <span>Orange</span>
+        </div>
+        <div className="filter-item fruit vege">
+          <span>Tomato</span>
+        </div>
+      </ul> */}
+    </>
           <div className='container mt-5'>
             <div className='row justify-content-center align-items-center'>
               <div className='col col-md-3'>
@@ -104,21 +126,20 @@ export default function Home() {
           <div className="col-lg-3">
             <ul className="nav nav-tabs flex-column">
               <li className="nav-item">
-                <a className="nav-link active show"  href="#">All</a>
-                <button>ts</button>
+                <a className="nav-link active show" onClick={handleFilterKeyChange('*')} href="#">All</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" data-toggle="tab" href="#tab-2">Opened</a>
+                <a className="nav-link" onClick={handleFilterKeyChange('opened')} href="#">Opened</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" data-toggle="tab" href="#tab-3">Closed</a>
+                <a className="nav-link"onClick={handleFilterKeyChange('closed')} href="#">Closed</a>
               </li>
         
             </ul>
           </div>
           <div className="col-lg-9 mt-4 mt-lg-0">
-            <div className="tab-content" >
-              <div className="tab-pane active show" id="tab-1">
+            <div className="tab-content filter-container" >
+              <div className="tab-pane active filter-item opened">
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">
                     <h3 className='title'>Blackseed</h3>
@@ -134,7 +155,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="tab-pane" id="tab-2">
+              <div className="tab-pane active filter-item closed" >
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">
                     <h3>Olive</h3>
@@ -150,7 +171,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="tab-pane" id="tab-3">
+              <div className="tab-pane active filter-item closed">
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">
                     <h3>Garlic</h3>
