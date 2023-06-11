@@ -98,7 +98,26 @@ export default function Home() {
                           <input className='form-control' placeholder='1ETH and above to be a stakeholder'/>
                         </div>
                         <div className="modal-footer">
-                          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" className="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="modal fade" id="modalId2" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title" id="modalTitleId">Create proposal</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                          <input className='form-control mb-2' placeholder='Title'/>
+                          <input className='form-control mb-2' type='number' placeholder='Amount'/>
+                          <input className='form-control mb-2'  placeholder='Beneficiary'/>
+                          <input className='form-control mb-2'  placeholder='Description'/>
+                        </div>
+                        <div className="modal-footer">
                           <button type="button" className="btn btn-primary">Submit</button>
                         </div>
                       </div>
@@ -108,7 +127,7 @@ export default function Home() {
                   
                
                 </div>
-                      <button className='btn btn-warning'>Propose</button>
+                      <button className='btn btn-warning'  type='button' data-bs-toggle="modal" data-bs-target="#modalId2">Propose</button>
               </div>
           </div>     
           <div className='container mt-5'>
