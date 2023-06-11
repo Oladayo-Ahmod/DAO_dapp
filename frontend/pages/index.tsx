@@ -16,6 +16,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <style jsx>
+        {
+          `
+            .title{
+              color : #2c4964;
+              font-size : 26px;
+              font-weight : 600;
+            }
+          `
+        }
+        </style>
         <div>
           <nav className="navbar navbar-expand-sm navbar-dark bg-white shadow-sm">
               <a className="navbar-brand" href="#">Navbar</a>
@@ -35,16 +46,16 @@ export default function Home() {
           <div className='container mt-5'>
             <div className='row justify-content-center align-items-center'>
               <div className='col col-md-3'>
-                  <p>Opened Proposals : </p>
+                  <h3 className='title' >Opened Proposals : </h3>
               </div>
               <div className='col col-md-3'>
-                  DAO Available Balance : 
+                  <h3 className='title'> DAO Balance : </h3>
               </div>
               <div className='col col-md-3'>
-                  Personal Contributions :
+                 <h3 className='title'> My Contributions :</h3>
               </div>
               <div className='col col-md-3'>
-                Status : stakeholder
+               <h3 className='title'>  Status : stakeholder</h3>
               </div>
             </div>
           </div>
@@ -102,7 +113,8 @@ export default function Home() {
                       </p>
                   </div>
                   <div className="col-lg-4 text-center order-1 order-lg-2">
-                    {/* <Image src="assets/img/olive.jpeg" alt="olive oil" className="img-fluid" /> */}
+                  <Image src="/thirteen.svg" width={200} height={200} alt="" className="img-fluid"/>
+
                   </div>
                 </div>
               </div>
