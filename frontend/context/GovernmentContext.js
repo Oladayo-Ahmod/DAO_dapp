@@ -1,6 +1,6 @@
 import React,{createContext,useEffect,useState} from 'react'
 
-const GOVERNMENT_CONTEXT = createContext()
+const GOVERNANCE_CONTEXT = createContext()
 
 let connect
 if(typeof window !=='undefined'){
@@ -17,4 +17,20 @@ const GOVERNANCE_PROVIDER =({children})=>{
             console.log(error);
         }
     }
+
+    return(
+        <GOVERNANCE_CONTEXT.Provider
+        
+        value={
+            connectWallet
+        }
+        >
+        {children}
+        </GOVERNANCE_CONTEXT.Provider>
+    )
+}
+
+module.exports = {
+    GOVERNANCE_CONTEXT,
+    GOVERNANCE_PROVIDER
 }
