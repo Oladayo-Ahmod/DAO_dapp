@@ -10,8 +10,8 @@ if(typeof window !=='undefined'){
 }
 const Government_provider =({children})=>{
     const [account,setAccount] = useState()
-    const [price,setPrice] = useState(null)
-    
+    const [amount,setAmount] = useState(null)
+    const [disability,setDisability] = useState(true)
 
     const connectWallet =async function(){
         // console.log(ethers);
@@ -22,13 +22,17 @@ const Government_provider =({children})=>{
     }
 
     const Contribute =async()=>{
-        if (price) {
+        if (amount) {
+            setDisability(true)
             const provider = new ethers.providers.Web3Provider(connect)
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            const parsedPrice = new ethers.utils.parseEther(price)
-            const tx = await contract.contribute({value : parsedPrice})
+            const parsedAmount = new ethers.utils.parseEther(amount)
+            const tx = await contract.contribute({value : parsedAmount})
             await tx.wait(1)
+        }
+        else{
+            setDisability(false)
         }
         
     }
@@ -39,7 +43,8 @@ const Government_provider =({children})=>{
         value={
            { 
             connectWallet,
-            account
+            account,
+            setAmount
         }
         }
         >
