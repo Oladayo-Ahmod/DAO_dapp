@@ -1,13 +1,13 @@
 import '@/styles/globals.css'
 import '@/styles/styles.css'
 
-import type { AppProps } from 'next/app'
-import {GOVERNANCE_PROVIDER} from '@/context/GovernmentContext'
+// import type { AppProps } from 'next/app'
+import {Government_provider} from '@/context/GovernmentContext'
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }) {
   return (
-    <GOVERNANCE_PROVIDER>
+    <Government_provider>
       <Component {...pageProps} />
-    </GOVERNANCE_PROVIDER>
+    </Government_provider>
   )
 }

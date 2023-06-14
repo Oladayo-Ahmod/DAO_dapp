@@ -6,15 +6,13 @@ let connect
 if(typeof window !=='undefined'){
     connect = window.ethereum
 }
-const GOVERNANCE_PROVIDER =({children})=>{
+const Government_provider =({children})=>{
     const [account,setAccount] = useState()
-
-    const connectWallet =async(wallet = connect)=>{
-        try {
-            const connector = await connect.requestAccount({method : 'eth_requestAccounts'})
-            setAccount(connector)
-        } catch (error) {
-            console.log(error);
+    const connectWallet =async function(){
+        if(connect){
+            const connector = await connect.request({method : 'eth_requestAccounts'})
+            console.log(connector);
+            // setAccount(connector)
         }
     }
 
@@ -22,7 +20,9 @@ const GOVERNANCE_PROVIDER =({children})=>{
         <GOVERNANCE_CONTEXT.Provider
         
         value={
-            connectWallet
+           { 
+            connectWallet,
+        }
         }
         >
         {children}
@@ -32,5 +32,5 @@ const GOVERNANCE_PROVIDER =({children})=>{
 
 module.exports = {
     GOVERNANCE_CONTEXT,
-    GOVERNANCE_PROVIDER
+    Government_provider
 }

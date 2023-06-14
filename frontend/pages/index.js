@@ -2,17 +2,18 @@ import Head from 'next/head'
 import Image from 'next/image'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Inter } from 'next/font/google'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { GOVERNANCE_CONTEXT,GOVERNANCE_PROVIDE } from "@/context/GovernmentContext";
 // import iso
 // import styles from '@/styles/Home.module.css'
-
+// const 
 const inter = Inter({ subsets: ['latin'] })
 let Isotope;
 
   
 
-export default function Home() {
-  
+const Home =()=> {
+  const {connectWallet} = useContext(GOVERNANCE_CONTEXT)
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
   // store the filter keyword in a state
@@ -77,7 +78,7 @@ export default function Home() {
                       </li>
                   </ul>
                   <form className="d-flex my-2 my-lg-0 px-2">
-                      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">connect wallet</button>
+                      <button className="btn btn-outline-success my-2 my-sm-0" type="button" onClick={connectWallet} >connect wallet</button>
                   </form>
               </div>
           </nav>
@@ -229,6 +230,9 @@ export default function Home() {
       </div>
     </section>
       </main>
+     
     </>
   )
 }
+
+export default Home
