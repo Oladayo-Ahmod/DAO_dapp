@@ -10,7 +10,7 @@ if(typeof window !=='undefined'){
 }
 const Government_provider =({children})=>{
     const [account,setAccount] = useState()
-    const [amount,setAmount] = useState(null)
+    const [amount,setAmount] = useState()
     const [disability,setDisability] = useState(true)
 
     const connectWallet =async function(){
@@ -44,7 +44,8 @@ const Government_provider =({children})=>{
            { 
             connectWallet,
             account,
-            setAmount
+            setAmount,
+            Contribute
         }
         }
         >

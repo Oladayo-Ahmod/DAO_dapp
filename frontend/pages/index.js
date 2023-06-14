@@ -3,7 +3,7 @@ import Image from 'next/image'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Inter } from 'next/font/google'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { GOVERNANCE_CONTEXT,setAmount } from "@/context/GovernanceContext";
+import { GOVERNANCE_CONTEXT } from "@/context/GovernanceContext";
 // import iso
 // import styles from '@/styles/Home.module.css'
 // const 
@@ -13,7 +13,7 @@ let Isotope;
   
 
 const Home =()=> {
-  const {connectWallet,account} = useContext(GOVERNANCE_CONTEXT)
+  const {connectWallet,account,setAmount,Contribute} = useContext(GOVERNANCE_CONTEXT)
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
   // store the filter keyword in a state
@@ -98,10 +98,10 @@ const Home =()=> {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                          <input className='form-control' onChange={(e)=> setAmount(e.target.value)} placeholder='1ETH and above to be a stakeholder'/>
+                          <input className='form-control' onChange={e=> setAmount( e.target.value)} placeholder='1ETH and above to be a stakeholder'/>
                         </div>
                         <div className="modal-footer">
-                          <button type="button" className="btn btn-primary">Submit</button>
+                          <button type="button" className="btn btn-primary" onClick={Contribute}>Submit</button>
                         </div>
                       </div>
                     </div>
