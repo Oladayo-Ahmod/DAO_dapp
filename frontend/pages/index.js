@@ -13,7 +13,7 @@ let Isotope;
   
 
 const Home =()=> {
-  const {connectWallet} = useContext(GOVERNANCE_CONTEXT)
+  const {connectWallet,account} = useContext(GOVERNANCE_CONTEXT)
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
   // store the filter keyword in a state
@@ -34,6 +34,7 @@ const Home =()=> {
 
   // handling filter key change
   useEffect(() => {
+    connectWallet()
     filterKey === '*'
       ? isotope.current.arrange({filter: `*`})
       : isotope.current.arrange({filter: `.${filterKey}`})
@@ -78,7 +79,8 @@ const Home =()=> {
                       </li>
                   </ul>
                   <form className="d-flex my-2 my-lg-0 px-2">
-                      <button className="btn btn-outline-success my-2 my-sm-0" type="button" onClick={connectWallet} >connect wallet</button>
+                      <button className="btn btn-outline-success my-2 my-sm-0" type="button" onClick={connectWallet} >  {account ? `${account.slice(0,6)}...${account.slice(account.length -4)}` : 'connect wallet'}
+</button>
                   </form>
               </div>
           </nav>

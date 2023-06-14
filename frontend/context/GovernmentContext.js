@@ -11,8 +11,7 @@ const Government_provider =({children})=>{
     const connectWallet =async function(){
         if(connect){
             const connector = await connect.request({method : 'eth_requestAccounts'})
-            console.log(connector);
-            // setAccount(connector)
+            setAccount(connector[0])
         }
     }
 
@@ -22,6 +21,7 @@ const Government_provider =({children})=>{
         value={
            { 
             connectWallet,
+            account
         }
         }
         >
