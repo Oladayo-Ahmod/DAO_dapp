@@ -106,6 +106,7 @@ const Government_provider =({children})=>{
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const propose = await contract.createProposal(title,description,beneficiary,parsedAmount)
+            console.log(formData);
 
         } catch (error) {
             console.log(error);
