@@ -44,8 +44,10 @@ const Government_provider =({children})=>{
         const signer = provider.getSigner()
         const contract = new ethers.Contract(ADDRESS,ABI,signer)
         const tx = await contract.getTotalBalance()
-        const balance = await tx.toString()
+        let balance = await tx.toString()
+        balance =  ethers.utils.formatUnits(balance.toString(),'ether')
         setTotalBalance(balance)
+        // console.log(balance);
     }
 
     return(
