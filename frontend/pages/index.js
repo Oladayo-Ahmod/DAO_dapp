@@ -25,7 +25,9 @@ const Home =()=> {
         getMyContribution,
         getStatus,
         status,
-        setFormData
+        setFormData,
+        propose,
+        formData
       } = useContext(GOVERNANCE_CONTEXT)
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
@@ -137,13 +139,13 @@ const Home =()=> {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                          <input className='form-control mb-2' onChange={e => setFormData({title : e.target.value})} placeholder='Title'/>
-                          <input className='form-control mb-2'  onChange={e => setFormData({amount : e.target.value})} type='number' placeholder='Amount'/>
-                          <input className='form-control mb-2'  onChange={e => setFormData({beneficiary : e.target.value})}  placeholder='Beneficiary'/>
-                          <input className='form-control mb-2'  onChange={e => setFormData({description : e.target.value})}  placeholder='Description'/>
+                          <input className='form-control mb-2' onChange={e => setFormData({...formData, title : e.target.value})} placeholder='Title'/>
+                          <input className='form-control mb-2'  onChange={e => setFormData({...formData,amount : e.target.value})} type='number' placeholder='Amount'/>
+                          <input className='form-control mb-2'  onChange={e => setFormData({...formData,beneficiary : e.target.value})}  placeholder='Beneficiary'/>
+                          <input className='form-control mb-2'  onChange={e => setFormData({...formData, description : e.target.value})}  placeholder='Description'/>
                         </div>
                         <div className="modal-footer">
-                          <button type="button" className="btn btn-primary">Submit</button>
+                          <button type="button" onClick={propose} className="btn btn-primary">Submit</button>
                         </div>
                       </div>
                     </div>
