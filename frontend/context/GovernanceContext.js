@@ -13,7 +13,7 @@ const Government_provider =({children})=>{
     const [amount,setAmount] = useState()
     const [disability,setDisability] = useState(false)
     const [totalBalance, setTotalBalance] = useState(0)
-    const [myBalance, setMyBalance] = useState(0)
+    const [myContribution, setMyContribution] = useState(0)
 
     const connectWallet =async function(){
         // console.log(ethers);
@@ -74,7 +74,7 @@ const Government_provider =({children})=>{
             getTotalBalance,
             totalBalance,
             getMyContribution,
-            myBalance
+            myContribution
         }
         }
         >

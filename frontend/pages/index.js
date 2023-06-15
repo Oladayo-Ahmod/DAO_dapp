@@ -13,7 +13,7 @@ let Isotope;
   
 
 const Home =()=> {
-  const {connectWallet,account,setAmount,Contribute,disability,getTotalBalance,totalBalance} = useContext(GOVERNANCE_CONTEXT)
+  const {connectWallet,account,setAmount,Contribute,disability,getTotalBalance,totalBalance,myContribution} = useContext(GOVERNANCE_CONTEXT)
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
   // store the filter keyword in a state
