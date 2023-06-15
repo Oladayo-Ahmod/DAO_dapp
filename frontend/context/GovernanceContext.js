@@ -22,6 +22,7 @@ const Government_provider =({children})=>{
         beneficiary : '',
         amount : ''
     })
+    const [validUser, setValidUser] = useState(false)
 
     const connectWallet =async function(){
         try {
@@ -46,6 +47,7 @@ const Government_provider =({children})=>{
                 const tx = await contract.contribute({value : parsedAmount})
                 await tx.wait(1)
                 setDisability(false)
+                setValidUser(true)
             }
             else{
                 setDisability(false)
@@ -73,17 +75,20 @@ const Government_provider =({children})=>{
     }
 
     const getMyContribution =async()=>{
-       try {
-        const provider = new ethers.providers.Web3Provider(connect)            
-        const signer = provider.getSigner()
-        const contract = new ethers.Contract(ADDRESS,ABI,signer)
-        const tx = await contract.getStakeholdersBalances()
-        let balance = await tx.toString()
-        balance =  ethers.utils.formatUnits(balance,'ether')
-        setMyContribution(balance)
-       } catch (error) {
-        console.log(error);
-       }
+        if (validUser) {
+            try {
+                const provider = new ethers.providers.Web3Provider(connect)            
+                const signer = provider.getSigner()
+                const contract = new ethers.Contract(ADDRESS,ABI,signer)
+                const tx = await contract.getStakeholdersBalances()
+                let balance = await tx.toString()
+                balance =  ethers.utils.formatUnits(balance,'ether')
+                setMyContribution(balance)
+               } catch (error) {
+                console.log(error);
+               }
+        }
+       
     }
 
     const getStatus =async() => {
@@ -99,18 +104,20 @@ const Government_provider =({children})=>{
     }
 
     const propose =async()=>{
-        try {
-            // const {title,description,beneficiary,amount} = formData
-            // let parsedAmount = new ethers.utils.parseEther(amount);
-            // const provider = new ethers.providers.Web3Provider(connect)            
-            // const signer = provider.getSigner()
-            // const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            // const propose = await contract.createProposal(title,description,beneficiary,parsedAmount)
-            console.log(formData);
-
-        } catch (error) {
-            console.log(error);
+        if (validUser) {
+            try {
+                const {title,description,beneficiary,amount} = formData
+                let parsedAmount = new ethers.utils.parseEther(amount);
+                const provider = new ethers.providers.Web3Provider(connect)            
+                const signer = provider.getSigner()
+                const contract = new ethers.Contract(ADDRESS,ABI,signer)
+                const propose = await contract.createProposal(title,description,beneficiary,parsedAmount)
+    
+            } catch (error) {
+                console.log(error);
+            }   
         }
+       
     }
 
     return(
