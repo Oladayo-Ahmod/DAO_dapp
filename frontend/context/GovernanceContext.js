@@ -16,6 +16,12 @@ const Government_provider =({children})=>{
     const [totalBalance, setTotalBalance] = useState(0)
     const [myContribution, setMyContribution] = useState(0)
     const [status , setStatus] = useState(false)
+    const [formData, setFormData] = useState({
+        title :'',
+        description : '',
+        beneficiary : '',
+        amount : ''
+    })
 
     const connectWallet =async function(){
         try {
@@ -92,6 +98,20 @@ const Government_provider =({children})=>{
         }
     }
 
+    const propose =async()=>{
+        try {
+            const {title,description,beneficiary,amount} = formData
+            let parsedAmount = new ethers.utils.parseEther(amount);
+            const provider = new ethers.providers.Web3Provider(connect)            
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const propose = await contract.createProposal(title,description,beneficiary,parsedAmount)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return(
         <GOVERNANCE_CONTEXT.Provider
         
@@ -107,7 +127,8 @@ const Government_provider =({children})=>{
             getMyContribution,
             myContribution,
             getStatus,
-            status
+            status,
+            setFormData
         }
         }
         >
