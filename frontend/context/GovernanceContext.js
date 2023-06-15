@@ -1,6 +1,6 @@
 import React,{createContext,useEffect,useState} from 'react'
 import {ADDRESS,ABI} from '../constants/index'
-import ethers from 'ethers'
+import {ethers} from 'ethers'
 
 const GOVERNANCE_CONTEXT = createContext()
 
@@ -22,14 +22,15 @@ const Government_provider =({children})=>{
     }
 
     const Contribute =async()=>{
-        if (amount) {
+        if (amount && connect) {
             setDisability(true)
-            const provider = new ethers.providers.Web3Provider(connect)
+            const provider = new ethers.providers.Web3Provider(connect)            
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const parsedAmount = new ethers.utils.parseEther(amount)
             const tx = await contract.contribute({value : parsedAmount})
             await tx.wait(1)
+            setDisability(false)
         }
         else{
             setDisability(false)
