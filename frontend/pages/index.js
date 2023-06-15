@@ -22,7 +22,8 @@ const Home =()=> {
         getTotalBalance,
         totalBalance,
         myContribution,
-        getMyContribution
+        getMyContribution,
+        getStatus
       } = useContext(GOVERNANCE_CONTEXT)
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
@@ -53,11 +54,11 @@ const Home =()=> {
 
   useEffect(()=>{
     getTotalBalance()
-  },[getTotalBalance])
-
-  useEffect(()=>{
     getMyContribution()
-  },[getMyContribution])
+    getStatus()
+  },[getTotalBalance,getMyContribution,getStatus])
+
+
 
   const handleFilterKeyChange = key => () => setFilterKey(key)
   return (
