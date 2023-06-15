@@ -11,7 +11,7 @@ if(typeof window !=='undefined'){
 const Government_provider =({children})=>{
     const [account,setAccount] = useState()
     const [amount,setAmount] = useState()
-    const [disability,setDisability] = useState(true)
+    const [disability,setDisability] = useState(false)
 
     const connectWallet =async function(){
         // console.log(ethers);
@@ -46,7 +46,8 @@ const Government_provider =({children})=>{
             connectWallet,
             account,
             setAmount,
-            Contribute
+            Contribute,
+            disability
         }
         }
         >
