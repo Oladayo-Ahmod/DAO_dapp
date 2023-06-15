@@ -43,8 +43,7 @@ const Home =()=> {
 
   useEffect(()=>{
     getTotalBalance()
-    
-  },[])
+  },[getTotalBalance])
 
   const handleFilterKeyChange = key => () => setFilterKey(key)
   return (
@@ -147,7 +146,7 @@ const Home =()=> {
               </div>
               <div className='col col-md-3 col-container bg-info rounded'>
                   <h5 className='title '> DAO Balance  </h5>
-                  <h4 className='text-white fw-bolder m-auto mt-5'>10</h4>
+                  <h4 className='text-white fw-bolder m-auto mt-5'>{totalBalance}</h4>
               </div>
               <div className='col col-md-3 col-container bg-success rounded'>
                  <h5 className='title'> My Contributions </h5>
