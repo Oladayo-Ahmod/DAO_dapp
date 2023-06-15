@@ -1,6 +1,7 @@
 import React,{createContext,useEffect,useState} from 'react'
 import {ADDRESS,ABI} from '../constants/index'
 import {ethers} from 'ethers'
+import Router, { useRouter } from 'next/router'
 
 const GOVERNANCE_CONTEXT = createContext()
 
@@ -17,42 +18,56 @@ const Government_provider =({children})=>{
     const [status , setStatus] = useState(false)
 
     const connectWallet =async function(){
-        // console.log(ethers);
-        if(connect){
-            const connector = await connect.request({method : 'eth_requestAccounts'})
-            setAccount(connector[0])
+        try {
+            if(connect){
+                const connector = await connect.request({method : 'eth_requestAccounts'})
+                setAccount(connector[0])
+                Router.push('/')
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
     const Contribute =async()=>{
-        if (amount && connect) {
-            setDisability(true)
-            const provider = new ethers.providers.Web3Provider(connect)            
-            const signer = provider.getSigner()
-            const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            const parsedAmount = new ethers.utils.parseEther(amount)
-            const tx = await contract.contribute({value : parsedAmount})
-            await tx.wait(1)
-            setDisability(false)
-        }
-        else{
-            setDisability(false)
+        try {
+            if (amount && connect) {
+                setDisability(true)
+                const provider = new ethers.providers.Web3Provider(connect)            
+                const signer = provider.getSigner()
+                const contract = new ethers.Contract(ADDRESS,ABI,signer)
+                const parsedAmount = new ethers.utils.parseEther(amount)
+                const tx = await contract.contribute({value : parsedAmount})
+                await tx.wait(1)
+                setDisability(false)
+            }
+            else{
+                setDisability(false)
+            }
+        } catch (error) {
+            console.log(error);
         }
         
     }
 
     const getTotalBalance =async()=>{
-        const provider = new ethers.providers.Web3Provider(connect)            
-        const signer = provider.getSigner()
-        const contract = new ethers.Contract(ADDRESS,ABI,signer)
-        const tx = await contract.getTotalBalance()
-        let balance = await tx.toString()
-        balance =  ethers.utils.formatUnits(balance,'ether')
-        setTotalBalance(balance)
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)            
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const tx = await contract.getTotalBalance()
+            let balance = await tx.toString()
+            balance =  ethers.utils.formatUnits(balance,'ether')
+            setTotalBalance(balance)
+        } catch (error) {
+            console.log(error);
+        }
+       
         // console.log(balance);
     }
 
     const getMyContribution =async()=>{
+       try {
         const provider = new ethers.providers.Web3Provider(connect)            
         const signer = provider.getSigner()
         const contract = new ethers.Contract(ADDRESS,ABI,signer)
@@ -60,14 +75,21 @@ const Government_provider =({children})=>{
         let balance = await tx.toString()
         balance =  ethers.utils.formatUnits(balance,'ether')
         setMyContribution(balance)
+       } catch (error) {
+        console.log(error);
+       }
     }
 
     const getStatus =async() => {
-        const provider = new ethers.providers.Web3Provider(connect)            
-        const signer = provider.getSigner()
-        const contract = new ethers.Contract(ADDRESS,ABI,signer)
-        const tx = await contract.stakeholderStatus()
-        setStatus(tx)
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)            
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const tx = await contract.stakeholderStatus()
+            setStatus(tx)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return(
