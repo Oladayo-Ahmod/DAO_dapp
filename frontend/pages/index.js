@@ -13,7 +13,17 @@ let Isotope;
   
 
 const Home =()=> {
-  const {connectWallet,account,setAmount,Contribute,disability,getTotalBalance,totalBalance,myContribution} = useContext(GOVERNANCE_CONTEXT)
+  const {
+        connectWallet,
+        account,
+        setAmount,
+        Contribute,
+        disability,
+        getTotalBalance,
+        totalBalance,
+        myContribution,
+        getMyContribution
+      } = useContext(GOVERNANCE_CONTEXT)
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
   // store the filter keyword in a state
@@ -44,6 +54,10 @@ const Home =()=> {
   useEffect(()=>{
     getTotalBalance()
   },[getTotalBalance])
+
+  useEffect(()=>{
+    getMyContribution()
+  },[getMyContribution])
 
   const handleFilterKeyChange = key => () => setFilterKey(key)
   return (
@@ -150,7 +164,7 @@ const Home =()=> {
               </div>
               <div className='col col-md-3 col-container bg-success rounded'>
                  <h5 className='title'> My Contributions </h5>
-                 <h4 className='text-white fw-bolder m-auto mt-5'>10</h4>
+                 <h4 className='text-white fw-bolder m-auto mt-5'>{`${myContribution} ETH`}</h4>
               </div>
               <div className='col col-md-3 col-container bg-warning rounded'>
                <h5 className='title'>  Status</h5>

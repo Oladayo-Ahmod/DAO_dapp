@@ -58,7 +58,7 @@ const Government_provider =({children})=>{
         const tx = await contract.getStakeholdersBalances()
         let balance = await tx.toString()
         balance =  ethers.utils.formatUnits(balance,'ether')
-        setMyBalance(balance)
+        setMyContribution(balance)
     }
 
     return(
