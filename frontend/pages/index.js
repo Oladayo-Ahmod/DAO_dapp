@@ -23,7 +23,8 @@ const Home =()=> {
         totalBalance,
         myContribution,
         getMyContribution,
-        getStatus
+        getStatus,
+        status
       } = useContext(GOVERNANCE_CONTEXT)
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
@@ -169,7 +170,7 @@ const Home =()=> {
               </div>
               <div className='col col-md-3 col-container bg-warning rounded'>
                <h5 className='title'>  Status</h5>
-               <h4 className='text-white fw-bolder m-auto mt-5'>Stakeholder</h4>
+               <h4 className='text-white fw-bolder m-auto mt-5'>{ status ? 'Stakeholder' : 'Contributor'}</h4>
               </div>
             </div>
           </div>

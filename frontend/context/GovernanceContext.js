@@ -84,7 +84,8 @@ const Government_provider =({children})=>{
             totalBalance,
             getMyContribution,
             myContribution,
-            getStatus
+            getStatus,
+            status
         }
         }
         >
