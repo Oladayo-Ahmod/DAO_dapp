@@ -21,8 +21,8 @@ const Home =()=> {
         disability,
         getTotalBalance,
         totalBalance,
-        myContribution,
-        getMyContribution,
+        stakeholderContribution,
+        getStakeholderBalance,
         getStatus,
         status,
         setFormData,
@@ -49,18 +49,20 @@ const Home =()=> {
 
   // handling filter key change
   useEffect(() => {
-    connectWallet()
     // console.log(totalBalance);
     filterKey === '*'
       ? isotope.current.arrange({filter: `*`})
       : isotope.current.arrange({filter: `.${filterKey}`})
   }, [filterKey])
+  useEffect(()=>{
+    connectWallet()
+  },[account])
 
   useEffect(()=>{
     getTotalBalance()
-    getMyContribution()
+    getStakeholderBalance()
     getStatus()
-  },[getTotalBalance,getMyContribution,getStatus])
+  },[getTotalBalance,getStakeholderBalance,getStatus])
 
 
 
@@ -169,7 +171,7 @@ const Home =()=> {
               </div>
               <div className='col col-md-3 col-container bg-success rounded'>
                  <h5 className='title'> My Contributions </h5>
-                 <h4 className='text-white fw-bolder m-auto mt-5'>{`${myContribution} ETH`}</h4>
+                 <h4 className='text-white fw-bolder m-auto mt-5'>{`${stakeholderContribution} ETH`}</h4>
               </div>
               <div className='col col-md-3 col-container bg-warning rounded'>
                <h5 className='title'>  Status</h5>

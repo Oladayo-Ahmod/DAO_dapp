@@ -14,7 +14,7 @@ const Government_provider =({children})=>{
     const [amount,setAmount] = useState()
     const [disability,setDisability] = useState(false)
     const [totalBalance, setTotalBalance] = useState(0)
-    const [myContribution, setMyContribution] = useState(0)
+    const [stakeholderBalance, setStakeholderBalance] = useState(0)
     const [status , setStatus] = useState(false)
     const [formData, setFormData] = useState({
         title :'',
@@ -71,10 +71,9 @@ const Government_provider =({children})=>{
             console.log(error);
         }
        
-        // console.log(balance);
     }
 
-    const getMyContribution =async()=>{
+    const getStakeholderBalance =async()=>{
         if (validUser) {
             try {
                 const provider = new ethers.providers.Web3Provider(connect)            
@@ -83,7 +82,24 @@ const Government_provider =({children})=>{
                 const tx = await contract.getStakeholdersBalances()
                 let balance = await tx.toString()
                 balance =  ethers.utils.formatUnits(balance,'ether')
-                setMyContribution(balance)
+                setStakeholderBalance(balance)
+               } catch (error) {
+                console.log(error);
+               }
+        }
+       
+    }
+
+    const getContributorBalance =async()=>{
+        if (validUser) {
+            try {
+                const provider = new ethers.providers.Web3Provider(connect)            
+                const signer = provider.getSigner()
+                const contract = new ethers.Contract(ADDRESS,ABI,signer)
+                const tx = await contract.getContributorsBalance()
+                let balance = await tx.toString()
+                balance =  ethers.utils.formatUnits(balance,'ether')
+                setStakeholderContribution(balance)
                } catch (error) {
                 console.log(error);
                }
@@ -132,8 +148,8 @@ const Government_provider =({children})=>{
             disability,
             getTotalBalance,
             totalBalance,
-            getMyContribution,
-            myContribution,
+            getStakeholderBalance,
+            stakeholderBalance,
             getStatus,
             status,
             setFormData,
