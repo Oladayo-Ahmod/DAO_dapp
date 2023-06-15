@@ -12,6 +12,7 @@ const Government_provider =({children})=>{
     const [account,setAccount] = useState()
     const [amount,setAmount] = useState()
     const [disability,setDisability] = useState(false)
+    const [totalBalance, setTotalBalance] = useState(0)
 
     const connectWallet =async function(){
         // console.log(ethers);
@@ -38,6 +39,15 @@ const Government_provider =({children})=>{
         
     }
 
+    const getTotalBalance =async()=>{
+        const provider = new ethers.providers.Web3Provider(connect)            
+        const signer = provider.getSigner()
+        const contract = new ethers.Contract(ADDRESS,ABI,signer)
+        const tx = await contract.getTotalBalance()
+        const balance = await tx.toString()
+        setTotalBalance(balance)
+    }
+
     return(
         <GOVERNANCE_CONTEXT.Provider
         
@@ -47,7 +57,9 @@ const Government_provider =({children})=>{
             account,
             setAmount,
             Contribute,
-            disability
+            disability,
+            getTotalBalance,
+            totalBalance
         }
         }
         >
