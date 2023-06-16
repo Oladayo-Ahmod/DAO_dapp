@@ -15,6 +15,7 @@ const Government_provider =({children})=>{
     const [disability,setDisability] = useState(false)
     const [totalBalance, setTotalBalance] = useState(0)
     const [stakeholderBalance, setStakeholderBalance] = useState(0)
+    const [contributorBalance, setContributorBalance] = useState(0)
     const [status , setStatus] = useState(false)
     const [formData, setFormData] = useState({
         title :'',
@@ -99,7 +100,7 @@ const Government_provider =({children})=>{
                 const tx = await contract.getContributorsBalance()
                 let balance = await tx.toString()
                 balance =  ethers.utils.formatUnits(balance,'ether')
-                setStakeholderContribution(balance)
+                setContributorBalance(balance)
                } catch (error) {
                 console.log(error);
                }
@@ -150,6 +151,8 @@ const Government_provider =({children})=>{
             totalBalance,
             getStakeholderBalance,
             stakeholderBalance,
+            getContributorBalance,
+            contributorBalance,
             getStatus,
             status,
             setFormData,
