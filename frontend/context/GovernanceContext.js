@@ -92,7 +92,6 @@ const Government_provider =({children})=>{
     }
 
     const getContributorBalance =async()=>{
-        if (validUser) {
             try {
                 const provider = new ethers.providers.Web3Provider(connect)            
                 const signer = provider.getSigner()
@@ -104,7 +103,6 @@ const Government_provider =({children})=>{
                } catch (error) {
                 console.log(error);
                }
-        }
        
     }
 
