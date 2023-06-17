@@ -25,8 +25,10 @@ const Home =()=> {
         getStakeholderBalance,
         getContributorBalance,
         contributorBalance,
-        getStatus,
-        status,
+        getContributorStatus,
+        getStakeholderStatus,
+        contributorStatus,
+        stakeholderStatus,
         setFormData,
         propose,
         formData
@@ -61,11 +63,15 @@ const Home =()=> {
   },[account])
 
   useEffect(()=>{
+    getContributorStatus()
+    getStakeholderStatus()
+  },[getContributorStatus,getStakeholderStatus])
+
+  useEffect(()=>{
     getTotalBalance()
     getStakeholderBalance()
     getContributorBalance()
-    getStatus()
-  },[getTotalBalance,getStakeholderBalance,getStatus,getContributorBalance])
+  },[getTotalBalance,getStakeholderBalance,getContributorBalance])
 
 
 

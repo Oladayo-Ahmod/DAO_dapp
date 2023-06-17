@@ -16,7 +16,8 @@ const Government_provider =({children})=>{
     const [totalBalance, setTotalBalance] = useState(0)
     const [stakeholderBalance, setStakeholderBalance] = useState(0)
     const [contributorBalance, setContributorBalance] = useState(0)
-    const [status , setStatus] = useState(false)
+    const [stakeholderStatus , setStakeholderStatus] = useState(false)
+    const [contributorStatus , setContributorStatus] = useState(false)
     const [formData, setFormData] = useState({
         title :'',
         description : '',
@@ -106,13 +107,27 @@ const Government_provider =({children})=>{
        
     }
 
-    const getStatus =async() => {
+    const getStakeholderStatus =async() => {
         try {
             const provider = new ethers.providers.Web3Provider(connect)            
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const tx = await contract.stakeholderStatus()
-            setStatus(tx)
+            setStakeholderStatus(tx)
+            // console.log(tx);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getContributorStatus =async() => {
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)            
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const tx = await contract.isContributor()
+            setContributorStatus(tx)
+            // console.log(tx);
         } catch (error) {
             console.log(error);
         }
@@ -152,8 +167,10 @@ const Government_provider =({children})=>{
             stakeholderBalance,
             getContributorBalance,
             contributorBalance,
-            getStatus,
-            status,
+            getContributorStatus,
+            getStakeholderStatus,
+            contributorStatus,
+            stakeholderStatus,
             setFormData,
             propose,
             formData
