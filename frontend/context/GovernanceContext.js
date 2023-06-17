@@ -28,6 +28,7 @@ const Government_provider =({children})=>{
     const [contributorBalance, setContributorBalance] = useState(0)
     const [stakeholderStatus , setStakeholderStatus] = useState(false)
     const [contributorStatus , setContributorStatus] = useState(false)
+    const [proposalsData, setProposalsData] = useState()
     const [formData, setFormData] = useState({
         title :'',
         description : '',
@@ -168,6 +169,30 @@ const Government_provider =({children})=>{
        
     }
 
+    const proposals =async()=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)            
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const proposals = await contract.getAllProposals()
+            const data = Promise.all(await proposals.map(async e =>{
+                let info = {
+                    title : e.title,
+                    description : e.description,
+                    amount : e.amount,
+                    beneficiary : e.beneficiary
+                }
+
+                return info
+            }))
+
+            setProposalsData(data)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return(
         <GOVERNANCE_CONTEXT.Provider
         
@@ -190,7 +215,9 @@ const Government_provider =({children})=>{
             stakeholderStatus,
             setFormData,
             propose,
-            formData
+            formData,
+            proposals,
+            proposalsData
         }
         }
         >

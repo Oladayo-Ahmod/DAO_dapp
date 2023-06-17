@@ -36,7 +36,8 @@ const Home =()=> {
         stakeholderStatus,
         setFormData,
         propose,
-        formData
+        formData,
+        proposals
       } = useContext(GOVERNANCE_CONTEXT)
 
   const modalRef = useRef(null) // boostrap modal
@@ -79,7 +80,8 @@ const Home =()=> {
     getTotalBalance()
     getStakeholderBalance()
     getContributorBalance()
-  },[getTotalBalance,getStakeholderBalance,getContributorBalance])
+    proposals()
+  },[getTotalBalance,getStakeholderBalance,getContributorBalance,proposals])
 
 
   const handleFilterKeyChange = key => () => setFilterKey(key)
