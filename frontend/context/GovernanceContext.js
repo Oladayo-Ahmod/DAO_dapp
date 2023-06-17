@@ -1,7 +1,8 @@
 import React,{createContext,useEffect,useState} from 'react'
 import {ADDRESS,ABI} from '../constants/index'
 import {ethers} from 'ethers'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
+import {useRouter }from 'next/navigation'
 
 const GOVERNANCE_CONTEXT = createContext()
 
@@ -10,6 +11,15 @@ if(typeof window !=='undefined'){
     connect = window.ethereum
 }
 const Government_provider =({children})=>{
+
+    useEffect(()=>{
+       if (connect) {
+            connect.on('accountsChanged',()=>{
+                Router.push('/')
+            })
+       }
+    })
+
     const [account,setAccount] = useState()
     const [amount,setAmount] = useState()
     const [disability,setDisability] = useState(false)
@@ -137,7 +147,7 @@ const Government_provider =({children})=>{
         
     }
 
-    const propose =async()=>{
+    const propose =async(modalRef)=>{
         if (stakeholderStatus) {
             try {
                 const {title,description,beneficiary,amount} = formData
@@ -145,8 +155,11 @@ const Government_provider =({children})=>{
                 const provider = new ethers.providers.Web3Provider(connect)            
                 const signer = provider.getSigner()
                 const contract = new ethers.Contract(ADDRESS,ABI,signer)
-                const propose = await contract.createProposal(title,description,beneficiary,parsedAmount)
+                const propose = await contract.createProposal(title,description,beneficiary.trim(),parsedAmount)
                 await propose.wait(1)
+                const modalElement = modalRef.current ? modalRef.current : ''
+                modalElement.classList.remove('show')
+                modalElement.style.display = 'none'
     
             } catch (error) {
                 console.log(error);

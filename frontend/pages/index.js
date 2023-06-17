@@ -4,12 +4,17 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { Inter } from 'next/font/google'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { GOVERNANCE_CONTEXT } from "@/context/GovernanceContext";
+import {useRouter }from 'next/navigation'
+
 // import iso
 // import styles from '@/styles/Home.module.css'
 // const 
 const inter = Inter({ subsets: ['latin'] })
 let Isotope;
-
+let connect
+if(typeof window !=='undefined'){
+    connect = window.ethereum
+}
   
 
 const Home =()=> {
@@ -74,7 +79,6 @@ const Home =()=> {
     getStakeholderBalance()
     getContributorBalance()
   },[getTotalBalance,getStakeholderBalance,getContributorBalance])
-
 
 
   const handleFilterKeyChange = key => () => setFilterKey(key)
@@ -144,7 +148,7 @@ const Home =()=> {
                     </div>
                   </div>
 
-                  <div className="modal fade" id="modalId2" tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                  <div className="modal fade" id="modalId2" ref={modalRef} tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                       <div className="modal-content">
                         <div className="modal-header">
@@ -158,7 +162,7 @@ const Home =()=> {
                           <input className='form-control mb-2'  onChange={e => setFormData({...formData, description : e.target.value})}  placeholder='Description'/>
                         </div>
                         <div className="modal-footer">
-                          <button type="button" onClick={propose} className="btn btn-primary">Submit</button>
+                          <button type="button" onClick={()=> propose(modalRef)} className="btn btn-primary">Submit</button>
                         </div>
                       </div>
                     </div>
