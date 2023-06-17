@@ -34,7 +34,7 @@ const Home =()=> {
         formData
       } = useContext(GOVERNANCE_CONTEXT)
 
-  const modalRef = useRef(null)
+  const modalRef = useRef(null) // boostrap modal
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
   // store the filter keyword in a state
@@ -127,7 +127,7 @@ const Home =()=> {
                   <button type='button' data-bs-toggle="modal" data-bs-target="#modalId" className='btn btn-primary'>Contribute</button>
                   
                   {/* <!-- Modal Body --> */}
-                  <div className="modal fade" ref={modalRef} id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                  <div className="modal fade" ref={modalRef} id="modalId" tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                       <div className="modal-content">
                         <div className="modal-header">
@@ -144,7 +144,7 @@ const Home =()=> {
                     </div>
                   </div>
 
-                  <div className="modal fade" id="modalId2" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                  <div className="modal fade" id="modalId2" tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                       <div className="modal-content">
                         <div className="modal-header">
