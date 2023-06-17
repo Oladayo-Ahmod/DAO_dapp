@@ -40,6 +40,7 @@ const Home =()=> {
       } = useContext(GOVERNANCE_CONTEXT)
 
   const modalRef = useRef(null) // boostrap modal
+  const modalRef2 = useRef(null) // boostrap modal
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
   // store the filter keyword in a state
@@ -148,7 +149,7 @@ const Home =()=> {
                     </div>
                   </div>
 
-                  <div className="modal fade" id="modalId2" ref={modalRef} tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                  <div className="modal fade" id="modalId2" ref={modalRef2} tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                       <div className="modal-content">
                         <div className="modal-header">
@@ -162,7 +163,7 @@ const Home =()=> {
                           <input className='form-control mb-2'  onChange={e => setFormData({...formData, description : e.target.value})}  placeholder='Description'/>
                         </div>
                         <div className="modal-footer">
-                          <button type="button" onClick={()=> propose(modalRef)} className="btn btn-primary">Submit</button>
+                          <button type="button" onClick={()=> propose(modalRef2)} className="btn btn-primary">Submit</button>
                         </div>
                       </div>
                     </div>
