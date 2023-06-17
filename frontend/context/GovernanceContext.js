@@ -24,7 +24,6 @@ const Government_provider =({children})=>{
         beneficiary : '',
         amount : ''
     })
-    const [validUser, setValidUser] = useState(false)
 
     const connectWallet =async function(){
         try {
@@ -49,7 +48,6 @@ const Government_provider =({children})=>{
                 const tx = await contract.contribute({value : parsedAmount})
                 await tx.wait(1)
                 setDisability(false)
-                amount >= 1 ? setValidUser(true) : ''
             }
             else{
                 setDisability(false)
@@ -76,7 +74,7 @@ const Government_provider =({children})=>{
     }
 
     const getStakeholderBalance =async()=>{
-        if (validUser) {
+        if (stakeholderStatus) {
             try {
                 const provider = new ethers.providers.Web3Provider(connect)            
                 const signer = provider.getSigner()
@@ -93,54 +91,51 @@ const Government_provider =({children})=>{
     }
 
     const getContributorBalance =async()=>{
-            try {
-                const provider = new ethers.providers.Web3Provider(connect)            
-                const signer = provider.getSigner()
-                const contract = new ethers.Contract(ADDRESS,ABI,signer)
-                const tx = await contract.getContributorsBalance()
-                let balance = await tx.toString()
-                balance =  ethers.utils.formatUnits(balance,'ether')
-                setContributorBalance(balance)
-               } catch (error) {
-                console.log(error);
-               }
+            if (contributorStatus) {
+                try {
+                    const provider = new ethers.providers.Web3Provider(connect)            
+                    const signer = provider.getSigner()
+                    const contract = new ethers.Contract(ADDRESS,ABI,signer)
+                    const tx = await contract.getContributorsBalance()
+                    let balance = await tx.toString()
+                    balance =  ethers.utils.formatUnits(balance,'ether')
+                    setContributorBalance(balance)
+                   } catch (error) {
+                    console.log(error);
+                   }    
+            }
+            
        
     }
 
     const getStakeholderStatus =async() => {
-        if (stakeholderStatus) {
             try {
                 const provider = new ethers.providers.Web3Provider(connect)            
                 const signer = provider.getSigner()
                 const contract = new ethers.Contract(ADDRESS,ABI,signer)
                 const tx = await contract.stakeholderStatus()
                 setStakeholderStatus(tx)
-                // console.log(tx);
             } catch (error) {
                 console.log(error);
             }    
-        }
         
     }
 
     const getContributorStatus =async() => {
-        if (contributorStatus) {
             try {
                 const provider = new ethers.providers.Web3Provider(connect)            
                 const signer = provider.getSigner()
                 const contract = new ethers.Contract(ADDRESS,ABI,signer)
                 const tx = await contract.isContributor()
                 setContributorStatus(tx)
-                console.log(tx);
             } catch (error) {
                 console.log(error);
             }    
-        }
         
     }
 
     const propose =async()=>{
-        // if (validUser) {
+        if (stakeholderStatus) {
             try {
                 const {title,description,beneficiary,amount} = formData
                 let parsedAmount = new ethers.utils.parseEther(amount);
@@ -153,7 +148,7 @@ const Government_provider =({children})=>{
             } catch (error) {
                 console.log(error);
             }   
-        // }
+        }
        
     }
 
