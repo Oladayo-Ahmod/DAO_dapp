@@ -184,7 +184,7 @@ const Home =()=> {
               </div>
               <div className='col col-md-3 col-container bg-warning rounded'>
                <h5 className='title'>  Status</h5>
-               <h4 className='text-white fw-bolder m-auto mt-5'>{ status ? 'Stakeholder' : 'Contributor'}</h4>
+               <h4 className='text-white fw-bolder m-auto mt-5'>{ stakeholderStatus ? 'Stakeholder' : contributorStatus ? 'Contributor' : 'New User'}</h4>
               </div>
             </div>
           </div>

@@ -108,29 +108,35 @@ const Government_provider =({children})=>{
     }
 
     const getStakeholderStatus =async() => {
-        try {
-            const provider = new ethers.providers.Web3Provider(connect)            
-            const signer = provider.getSigner()
-            const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            const tx = await contract.stakeholderStatus()
-            setStakeholderStatus(tx)
-            // console.log(tx);
-        } catch (error) {
-            console.log(error);
+        if (stakeholderStatus) {
+            try {
+                const provider = new ethers.providers.Web3Provider(connect)            
+                const signer = provider.getSigner()
+                const contract = new ethers.Contract(ADDRESS,ABI,signer)
+                const tx = await contract.stakeholderStatus()
+                setStakeholderStatus(tx)
+                // console.log(tx);
+            } catch (error) {
+                console.log(error);
+            }    
         }
+        
     }
 
     const getContributorStatus =async() => {
-        try {
-            const provider = new ethers.providers.Web3Provider(connect)            
-            const signer = provider.getSigner()
-            const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            const tx = await contract.isContributor()
-            setContributorStatus(tx)
-            // console.log(tx);
-        } catch (error) {
-            console.log(error);
+        if (contributorStatus) {
+            try {
+                const provider = new ethers.providers.Web3Provider(connect)            
+                const signer = provider.getSigner()
+                const contract = new ethers.Contract(ADDRESS,ABI,signer)
+                const tx = await contract.isContributor()
+                setContributorStatus(tx)
+                console.log(tx);
+            } catch (error) {
+                console.log(error);
+            }    
         }
+        
     }
 
     const propose =async()=>{
