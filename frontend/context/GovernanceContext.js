@@ -48,7 +48,7 @@ const Government_provider =({children})=>{
                 const tx = await contract.contribute({value : parsedAmount})
                 await tx.wait(1)
                 setDisability(false)
-                setValidUser(true)
+                amount >= 1 ? setValidUser(true) : ''
             }
             else{
                 setDisability(false)
@@ -119,7 +119,7 @@ const Government_provider =({children})=>{
     }
 
     const propose =async()=>{
-        if (validUser) {
+        // if (validUser) {
             try {
                 const {title,description,beneficiary,amount} = formData
                 let parsedAmount = new ethers.utils.parseEther(amount);
@@ -127,11 +127,12 @@ const Government_provider =({children})=>{
                 const signer = provider.getSigner()
                 const contract = new ethers.Contract(ADDRESS,ABI,signer)
                 const propose = await contract.createProposal(title,description,beneficiary,parsedAmount)
+                await propose.wait(1)
     
             } catch (error) {
                 console.log(error);
             }   
-        }
+        // }
        
     }
 

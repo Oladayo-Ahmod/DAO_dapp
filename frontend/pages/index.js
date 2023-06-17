@@ -64,7 +64,6 @@ const Home =()=> {
     getTotalBalance()
     getStakeholderBalance()
     getContributorBalance()
-    console.log(contributorBalance);
     getStatus()
   },[getTotalBalance,getStakeholderBalance,getStatus,getContributorBalance])
 
