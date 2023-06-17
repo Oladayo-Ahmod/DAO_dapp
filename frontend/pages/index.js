@@ -82,7 +82,6 @@ const Home =()=> {
     getStakeholderBalance()
     getContributorBalance()
     proposals()
-    console.log(proposalsData);
   },[getTotalBalance,getStakeholderBalance,getContributorBalance,proposals])
 
 
@@ -183,7 +182,7 @@ const Home =()=> {
             <div className='row justify-content-center align-items-center'>
               <div className='col col-md-3 bg-primary col-container rounded'>
                   <h5 className='title' >Opened Proposals  </h5>
-                  <h4 className='text-white fw-bolder m-auto mt-5'>10</h4>
+                  <h4 className='text-white fw-bolder m-auto mt-5'>{proposalsData? proposalsData.length : '0'}</h4>
               </div>
               <div className='col col-md-3 col-container bg-info rounded'>
                   <h5 className='title '> DAO Balance  </h5>
@@ -226,7 +225,7 @@ const Home =()=> {
           </div>
           <div className="col-lg-9 mt-4 mt-lg-0">
             <div className="tab-content filter-container" >
-              {/* { proposalsData? proposalsData.map(i=>(
+              { proposalsData? proposalsData.map(i=>(
                 <>
                  <div className="tab-pane active filter-item opened">
                 <div className="row">
@@ -245,7 +244,7 @@ const Home =()=> {
                 </div>
               </div>
                 </>
-              )) : '' } */}
+              )) : '' }
              
               <div className="tab-pane active filter-item closed" >
                 <div className="row">
