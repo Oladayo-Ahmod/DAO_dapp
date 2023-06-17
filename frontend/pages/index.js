@@ -37,7 +37,8 @@ const Home =()=> {
         setFormData,
         propose,
         formData,
-        proposals
+        proposals,
+        proposalsData
       } = useContext(GOVERNANCE_CONTEXT)
 
   const modalRef = useRef(null) // boostrap modal
@@ -81,6 +82,7 @@ const Home =()=> {
     getStakeholderBalance()
     getContributorBalance()
     proposals()
+    console.log(proposalsData);
   },[getTotalBalance,getStakeholderBalance,getContributorBalance,proposals])
 
 
@@ -224,7 +226,9 @@ const Home =()=> {
           </div>
           <div className="col-lg-9 mt-4 mt-lg-0">
             <div className="tab-content filter-container" >
-              <div className="tab-pane active filter-item opened">
+              {/* { proposalsData? proposalsData.map(i=>(
+                <>
+                 <div className="tab-pane active filter-item opened">
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">
                     <h3 className='title'>Blackseed</h3>
@@ -240,6 +244,9 @@ const Home =()=> {
                   </div>
                 </div>
               </div>
+                </>
+              )) : '' } */}
+             
               <div className="tab-pane active filter-item closed" >
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">

@@ -175,7 +175,7 @@ const Government_provider =({children})=>{
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const proposals = await contract.getAllProposals()
-            const data = Promise.all(await proposals.map(async e =>{
+            const data = await Promise.all(await proposals.map( e =>{
                 let info = {
                     title : e.title,
                     description : e.description,
