@@ -33,6 +33,8 @@ const Home =()=> {
         propose,
         formData
       } = useContext(GOVERNANCE_CONTEXT)
+
+  const modalRef = useRef(null)
   // state for storing the isotope object, with an initial value of null
   const isotope = useRef();
   // store the filter keyword in a state
@@ -125,7 +127,7 @@ const Home =()=> {
                   <button type='button' data-bs-toggle="modal" data-bs-target="#modalId" className='btn btn-primary'>Contribute</button>
                   
                   {/* <!-- Modal Body --> */}
-                  <div className="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                  <div className="modal fade" ref={modalRef} id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                       <div className="modal-content">
                         <div className="modal-header">
@@ -136,7 +138,7 @@ const Home =()=> {
                           <input className='form-control' onChange={e=> setAmount( e.target.value)} placeholder='1ETH and above to be a stakeholder'/>
                         </div>
                         <div className="modal-footer">
-                          <button type="button" className="btn btn-primary" disabled={disability} onClick={Contribute}>Submit</button>
+                          <button type="button" className="btn btn-primary" disabled={disability} onClick={()=>Contribute(modalRef)}>Submit</button>
                         </div>
                       </div>
                     </div>

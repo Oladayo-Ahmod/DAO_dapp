@@ -37,7 +37,7 @@ const Government_provider =({children})=>{
         }
     }
 
-    const Contribute =async()=>{
+    const Contribute =async(modalRef)=>{
         try {
             if (amount && connect) {
                 setDisability(true)
@@ -48,6 +48,9 @@ const Government_provider =({children})=>{
                 const tx = await contract.contribute({value : parsedAmount})
                 await tx.wait(1)
                 setDisability(false)
+                const modalElement = modalRef.current ? modalRef.current : ''
+                modalElement.classList.remove('show')
+                modalElement.style.display = 'none'
             }
             else{
                 setDisability(false)
