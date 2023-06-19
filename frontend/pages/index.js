@@ -238,7 +238,7 @@ const Home =()=> {
                     <p className="font-italic description">
                       {i.description}
                     </p>
-                    <button className="btn btn-success my-2 btn-sm position-relative" >
+                    <button className="btn btn-success m-2 btn-sm position-relative" >
                       upVote 
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                        {i.upVote}
@@ -255,7 +255,7 @@ const Home =()=> {
                      </button>
                   </div>
                   <div className="col-lg-4 d-flex voting-span justify-content-between order-1 order-lg-2">
-                    <p> Amount : <span>{}</span></p>
+                    <p className='title'> Amount : <span>{i.amount}</span></p>
                   </div>
                 </div>
               </div>

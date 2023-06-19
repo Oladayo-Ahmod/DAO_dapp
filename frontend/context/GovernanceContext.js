@@ -196,6 +196,20 @@ const Government_provider =({children})=>{
         }
     }
 
+    const voting =async(proposalId,vote)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)            
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const vote = await contract.performVote(proposalId,vote)
+            console.log(vote);
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return(
         <GOVERNANCE_CONTEXT.Provider
         
