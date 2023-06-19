@@ -151,6 +151,7 @@ const Government_provider =({children})=>{
     const propose =async(modalRef)=>{
         if (stakeholderStatus) {
             try {
+                setDisability(true)
                 const {title,description,beneficiary,amount} = formData
                 let parsedAmount = new ethers.utils.parseEther(amount);
                 const provider = new ethers.providers.Web3Provider(connect)            
@@ -158,11 +159,13 @@ const Government_provider =({children})=>{
                 const contract = new ethers.Contract(ADDRESS,ABI,signer)
                 const propose = await contract.createProposal(title,description,beneficiary.trim(),parsedAmount)
                 await propose.wait(1)
+                setDisability(false)
                 const modalElement = modalRef.current ? modalRef.current : ''
                 modalElement.classList.remove('show')
                 modalElement.style.display = 'none'
     
             } catch (error) {
+                setDisability(false)
                 console.log(error);
             }   
         }

@@ -171,7 +171,7 @@ const Home =()=> {
                           <input className='form-control mb-2'  onChange={e => setFormData({...formData, description : e.target.value})}  placeholder='Description'/>
                         </div>
                         <div className="modal-footer">
-                          <button type="button" onClick={()=> propose(modalRef2)} className="btn btn-primary">Submit</button>
+                          <button type="button" disabled={disability} onClick={()=> propose(modalRef2)} className="btn btn-primary">Submit</button>
                         </div>
                       </div>
                     </div>
@@ -250,7 +250,7 @@ const Home =()=> {
 
                      <button className="btn btn-danger btn-sm position-relative" type='buttton' onClick={()=>voting(i.id,false)}>
                       downVote 
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
                         {i.downVote}
                         <span className="visually-hidden">unread messages</span>
                       </span>
