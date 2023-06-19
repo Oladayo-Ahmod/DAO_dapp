@@ -177,12 +177,13 @@ const Government_provider =({children})=>{
             const proposals = await contract.getAllProposals()
             const data = await Promise.all(await proposals.map( e =>{
                 let info = {
+                    id : e.id.toString(),
                     title : e.title,
                     description : e.description,
                     amount : ethers.utils.formatEther(e.amount.toString(),'ether'),
                     beneficiary : e.beneficiary,
                     upVote : e.upVote.toString(),
-                    downVote : e.downVotes.toString()
+                    downVote : e.downVotes.toString(),
 
                 }
 
@@ -201,12 +202,20 @@ const Government_provider =({children})=>{
             const provider = new ethers.providers.Web3Provider(connect)            
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            const vote = await contract.performVote(proposalId,vote)
-            console.log(vote);
+            const tx = await contract.performVote(proposalId,vote)
+            // console.log(tx);
 
 
         } catch (error) {
-            console.log(error);
+            if(error.message.includes('Time has already passed')){
+                console.log('time passed');
+            }
+            else if (error.message.includes('double voting is not allowed')) {
+                console.log('double voting is not allowed');
+            }
+            else{
+                console.log(error);
+            }
         }
     }
 
@@ -234,7 +243,8 @@ const Government_provider =({children})=>{
             propose,
             formData,
             proposals,
-            proposalsData
+            proposalsData,
+            voting
         }
         }
         >

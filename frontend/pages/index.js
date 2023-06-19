@@ -38,7 +38,8 @@ const Home =()=> {
         propose,
         formData,
         proposals,
-        proposalsData
+        proposalsData,
+        voting
       } = useContext(GOVERNANCE_CONTEXT)
 
   const modalRef = useRef(null) // boostrap modal
@@ -238,7 +239,7 @@ const Home =()=> {
                     <p className="font-italic description">
                       {i.description}
                     </p>
-                    <button className="btn btn-success m-2 btn-sm position-relative" >
+                    <button className="btn btn-success m-2 btn-sm position-relative" onClick={()=>voting(i.id,true)}>
                       upVote 
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                        {i.upVote}
@@ -246,7 +247,7 @@ const Home =()=> {
                       </span>
                      </button>
 
-                     <button className="btn btn-danger btn-sm position-relative" >
+                     <button className="btn btn-danger btn-sm position-relative" type='buttton' onClick={()=>voting(i.id,false)}>
                       downVote 
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                         {i.downVote}
