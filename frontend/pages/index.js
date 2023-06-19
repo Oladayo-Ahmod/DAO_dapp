@@ -230,9 +230,10 @@ const Home =()=> {
           </div>
           <div className="col-lg-9 mt-4 mt-lg-0">
             <div className="tab-content filter-container" >
+              
+              <div className='row' >
               { proposalsData? proposalsData.map(i=>(
-                <>
-                 <div className="tab-pane active filter-item opened" key={i.id}>
+                 <div className="col tab-pane active filter-item opened" >
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">
                     <h3 className='title'>{i.title.charAt(0).toUpperCase() + i.title.slice(1)}</h3>
@@ -255,14 +256,14 @@ const Home =()=> {
                       </span>
                      </button>
                   </div>
-                  <div className="col-lg-4 d-flex voting-span justify-content-between order-1 order-lg-2">
+                  <div className="col-lg-4 d-flex voting-span justify-content-between order-1 order-lg-2 mb-5">
                     <p className='title'> Amount : <span>{i.amount}</span></p>
                   </div>
                 </div>
               </div>
-                </>
-              )) : '' }
-             
+                
+              )) : <h3>Loading ...</h3> }
+             </div>
           
             </div>
           </div>
@@ -270,6 +271,9 @@ const Home =()=> {
 
       </div>
     </section>
+    <footer className='mt-5'>
+      <h3>copyright 2023</h3>
+    </footer>
       </main>
      
     </>
