@@ -109,6 +109,9 @@ const Home =()=> {
               margin :20px 20px;
               padding : 20px 5px 0 5px;
             }
+            .voting-span{
+              cursor : pointer;
+            }
           `
         }
         </style>
@@ -181,7 +184,7 @@ const Home =()=> {
           <div className='container mt-5'>
             <div className='row justify-content-center align-items-center'>
               <div className='col col-md-3 bg-primary col-container rounded'>
-                  <h5 className='title' >Opened Proposals  </h5>
+                  <h5 className='title' >Total Proposals  </h5>
                   <h4 className='text-white fw-bolder m-auto mt-5'>{proposalsData? proposalsData.length : '0'}</h4>
               </div>
               <div className='col col-md-3 col-container bg-info rounded'>
@@ -227,53 +230,37 @@ const Home =()=> {
             <div className="tab-content filter-container" >
               { proposalsData? proposalsData.map(i=>(
                 <>
-                 <div className="tab-pane active filter-item opened">
+                 <div className="tab-pane active filter-item opened" key={i.id}>
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">
-                    <h3 className='title'>Blackseed</h3>
-                    <p className="font-italic description">Blackseed (nigella sativa) also called black cumin, 
-                      black caraway, black onion seed contains some chemical compounds known as thymoquinone and caryophyllene.</p>
-                    <p>It has been used for medical cares since thousands of years back. It is good for medical Conditions
-                      such as <b>asthma, high blood pressure, diabetes, inflammation, eczema, flu, fever, headache, skin care.</b> etc.
-                       <i>We have it in form of powder, oil(virgin and extra virgin) and seed.</i>
+                    <h3 className='title'>{i.title.charAt(0).toUpperCase() + i.title.slice(1)}</h3>
+                    <p className="font-italic description">
+                      {i.description}
                     </p>
+                    <button className="btn btn-success my-2 btn-sm position-relative" >
+                      upVote 
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                        99+
+                        <span className="visually-hidden">unread messages</span>
+                      </span>
+                     </button>
+
+                     <button className="btn btn-danger btn-sm position-relative" >
+                      downVote 
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                        99+
+                        <span className="visually-hidden">unread messages</span>
+                      </span>
+                     </button>
                   </div>
-                  <div className="col-lg-4 text-center order-1 order-lg-2">
-                    <Image src="/thirteen.svg" width={200} height={200} alt="" className="img-fluid"/>
+                  <div className="col-lg-4 d-flex voting-span justify-content-between order-1 order-lg-2">
+
                   </div>
                 </div>
               </div>
                 </>
               )) : '' }
              
-              <div className="tab-pane active filter-item closed" >
-                <div className="row">
-                  <div className="col-lg-8 details order-2 order-lg-1">
-                    <h3>Olive</h3>
-                    <p className="font-italic">Olive belongs to the group of fruits known as DRUPES.</p>
-                    <p>It is very high in vitamin E, fibre and other powerful antioxidants.
-                       It protects against osteoporosis and Cancer and also serves as pain reduction and apetite control.
-                        <i>Available in seeds, oil and powder.</i>
-                      </p>
-                  </div>
-                  <div className="col-lg-4 text-center order-1 order-lg-2">
-                  <Image src="/thirteen.svg" width={200} height={200} alt="" className="img-fluid"/>
-
-                  </div>
-                </div>
-              </div>
-              <div className="tab-pane active filter-item closed">
-                <div className="row">
-                  <div className="col-lg-8 details order-2 order-lg-1">
-                    <h3>Garlic</h3>
-                    <p className="font-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
-                    <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et harum voluptatem optio quae</p>
-                  </div>
-                  <div className="col-lg-4 text-center order-1 order-lg-2">
-                    {/* <Image src="assets/img/garlic.jpeg" alt="garlic oil" className="img-fluid" /> */}
-                  </div>
-                </div>
-              </div>
           
             </div>
           </div>
