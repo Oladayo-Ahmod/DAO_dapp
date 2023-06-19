@@ -179,8 +179,11 @@ const Government_provider =({children})=>{
                 let info = {
                     title : e.title,
                     description : e.description,
-                    amount : e.amount,
-                    beneficiary : e.beneficiary
+                    amount : ethers.utils.formatEther(e.amount.toString(),'ether'),
+                    beneficiary : e.beneficiary,
+                    upVote : e.upVote.toString(),
+                    downVote : e.downVotes.toString()
+
                 }
 
                 return info

@@ -82,6 +82,7 @@ const Home =()=> {
     getStakeholderBalance()
     getContributorBalance()
     proposals()
+    console.log(proposalsData)
   },[getTotalBalance,getStakeholderBalance,getContributorBalance,proposals])
 
 
@@ -240,7 +241,7 @@ const Home =()=> {
                     <button className="btn btn-success my-2 btn-sm position-relative" >
                       upVote 
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                        99+
+                       {i.upVote}
                         <span className="visually-hidden">unread messages</span>
                       </span>
                      </button>
@@ -248,13 +249,13 @@ const Home =()=> {
                      <button className="btn btn-danger btn-sm position-relative" >
                       downVote 
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                        99+
+                        {i.downVote}
                         <span className="visually-hidden">unread messages</span>
                       </span>
                      </button>
                   </div>
                   <div className="col-lg-4 d-flex voting-span justify-content-between order-1 order-lg-2">
-
+                    <p> Amount : <span>{}</span></p>
                   </div>
                 </div>
               </div>
