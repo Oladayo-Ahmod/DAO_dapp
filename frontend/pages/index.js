@@ -83,7 +83,7 @@ const Home =()=> {
     getStakeholderBalance()
     getContributorBalance()
     proposals()
-    console.log(proposalsData)
+    // console.log(proposalsData)
   },[getTotalBalance,getStakeholderBalance,getContributorBalance,proposals])
 
 

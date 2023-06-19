@@ -203,7 +203,7 @@ const Government_provider =({children})=>{
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const tx = await contract.performVote(proposalId,vote)
-            // console.log(tx);
+            console.log(tx);
 
 
         } catch (error) {
