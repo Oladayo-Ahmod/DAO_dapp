@@ -187,6 +187,7 @@ const Government_provider =({children})=>{
                     beneficiary : e.beneficiary,
                     upVote : e.upVote.toString(),
                     downVote : e.downVotes.toString(),
+                    paid : e.paid
 
                 }
 
