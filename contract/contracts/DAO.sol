@@ -276,6 +276,9 @@ contract Dao is AccessControl,ReentrancyGuard {
         return contributors[msg.sender];
     }
     
+    function getDeployer()external view returns(address){
+        return deployer;
 
+    }
 
 }
