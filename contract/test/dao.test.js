@@ -161,7 +161,7 @@ describe("DAO",()=>{
         await DAO.getTotalBalance().then((result)=>{
         previousBalance = result
         })
-        const processPayment = await DAO.connect(stakeholder).payBeneficiary(0)
+        const processPayment = await DAO.payBeneficiary(0)
         const events = await processPayment.wait().then((result)=>{
             return result.events.find((event)=> event.event == 'ProposalAction')
         })
