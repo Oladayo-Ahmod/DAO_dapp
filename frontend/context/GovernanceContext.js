@@ -2,7 +2,7 @@ import React,{createContext,useEffect,useState} from 'react'
 import {ADDRESS,ABI} from '../constants/index'
 import {ethers} from 'ethers'
 import Router from 'next/router'
-import {useRouter }from 'next/navigation'
+import Swal from "sweetalert2"
 
 const GOVERNANCE_CONTEXT = createContext()
 
@@ -75,6 +75,14 @@ const Government_provider =({children})=>{
                 const modalElement = modalRef.current ? modalRef.current : ''
                 modalElement.classList.remove('show')
                 modalElement.style.display = 'none'
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    text: `You have successfully contributed ${amount} ETH to the DAO`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+
             }
             else{
                 setDisability(false)
@@ -176,6 +184,13 @@ const Government_provider =({children})=>{
                 const modalElement = modalRef.current ? modalRef.current : ''
                 modalElement.classList.remove('show')
                 modalElement.style.display = 'none'
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    text: `You have madea a proposal successfully!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
     
             } catch (error) {
                 setDisability(false)
@@ -224,10 +239,22 @@ const Government_provider =({children})=>{
 
         } catch (error) {
             if(error.message.includes('Time has already passed')){
-                console.log('time passed');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Sorry, voting time has ended`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
             }
             else if (error.message.includes('double voting is not allowed')) {
-                console.log('double voting is not allowed');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `You have already voted!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
             }
             else{
                 console.log(error);
@@ -242,6 +269,13 @@ const Government_provider =({children})=>{
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const tx = await contract.payBeneficiary(proposalId)
             await tx.wait(1)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `Payment made successfully!`,
+                showConfirmButton: true,
+                timer: 4000
+            })
 
         } catch (error) {
             console.log(error);
