@@ -70,7 +70,7 @@ contract Dao is AccessControl,ReentrancyGuard {
     }
 
     modifier onlyDeployer(string memory message) {
-        require(msg.sender == deployer);
+        require(msg.sender == deployer,message);
 
         _;
     }
