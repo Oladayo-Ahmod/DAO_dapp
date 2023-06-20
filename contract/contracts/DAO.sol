@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 contract Dao is AccessControl,ReentrancyGuard {
     uint256 totalProposals;
     uint256 balance;
+    address deployer;
 
     uint256 immutable STAKEHOLDER_MIN_CONTRIBUTION = 1 ether;
     uint256 immutable MIN_VOTE_PERIOD = 5 minutes;
@@ -68,6 +69,15 @@ contract Dao is AccessControl,ReentrancyGuard {
         _;
     }
 
+    modifier onlyDeployer(string memory message) {
+        require(msg.sender == deployer);
+
+        _;
+    }
+
+    constructor(){
+        deployer = msg.sender;
+    }
     // proposal creation
     function createProposal (
         string calldata title,
@@ -86,7 +96,7 @@ contract Dao is AccessControl,ReentrancyGuard {
 
         emit ProposalAction(
             msg.sender,
-            STAKEHOLDER_ROLE,          
+            STAKEHOLDER_ROLE,       
             'Proposal Raised',
             beneficiary,
             amount
@@ -150,7 +160,7 @@ contract Dao is AccessControl,ReentrancyGuard {
 
     // pay beneficiary
     function payBeneficiary(uint proposalId) external 
-    stakeholderOnly("Only stakeholders can make payment") nonReentrant() returns(uint256){
+    stakeholderOnly("Only stakeholders can make payment") onlyDeployer("Only deployer can make payment") nonReentrant() returns(uint256){
         Proposals storage stakeholderProposal = raisedProposals[proposalId];
         require(balance >= stakeholderProposal.amount, "insufficient fund");
         if(stakeholderProposal.paid == true) revert("payment already made");
