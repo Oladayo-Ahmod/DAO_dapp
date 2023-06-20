@@ -40,7 +40,9 @@ const Home =()=> {
         proposals,
         proposalsData,
         voting,
-        payBeneficiary
+        payBeneficiary,
+        getDeployer,
+        deployer
       } = useContext(GOVERNANCE_CONTEXT)
 
   const modalRef = useRef(null) // boostrap modal
@@ -72,7 +74,9 @@ const Home =()=> {
   }, [filterKey])
   useEffect(()=>{
     connectWallet()
-  },[account])
+    getDeployer()
+    console.log(deployer,'  ',account);
+  },[account,deployer])
 
   useEffect(()=>{
     getContributorStatus()
@@ -84,7 +88,6 @@ const Home =()=> {
     getStakeholderBalance()
     getContributorBalance()
     proposals()
-    console.log(proposalsData)
   },[getTotalBalance,getStakeholderBalance,getContributorBalance,proposals])
 
 
@@ -256,9 +259,18 @@ const Home =()=> {
                         <span className="visually-hidden">unread messages</span>
                       </span>
                      </button>
-                     <button className="btn btn-danger btn-sm position-relative" type='buttton' onClick={()=>payBeneficiary(i.id)}>
-                      pay beneficiary
-                     </button>
+                     {
+                        Number(account) == Number(deployer) ? 
+                          <button className="btn btn-danger btn-sm position-relative m-2" type='buttton' onClick={()=>payBeneficiary(i.id)}>
+                          pay beneficiary
+                         </button>
+                        
+                        :
+                          <button className="btn btn-danger btn-sm position-relative m-2" disabled='true' type='buttton' onClick={()=>payBeneficiary(i.id)}>
+                          pay beneficiary
+                         </button>
+                     }
+                    
                   </div>
                   <div className="col-lg-4 d-flex voting-span justify-content-between order-1 order-lg-2 mb-5">
                     <p className='title'> Amount : <span>{i.amount}</span></p>

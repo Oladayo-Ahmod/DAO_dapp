@@ -29,6 +29,7 @@ const Government_provider =({children})=>{
     const [stakeholderStatus , setStakeholderStatus] = useState(false)
     const [contributorStatus , setContributorStatus] = useState(false)
     const [proposalsData, setProposalsData] = useState()
+    const [deployer, setDeployer] = useState()
     const [formData, setFormData] = useState({
         title :'',
         description : '',
@@ -43,6 +44,18 @@ const Government_provider =({children})=>{
                 setAccount(connector[0])
                 Router.push('/')
             }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getDeployer =async()=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)            
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const deployer = await contract.getDeployer()
+            setDeployer(deployer)
         } catch (error) {
             console.log(error);
         }
@@ -234,6 +247,23 @@ const Government_provider =({children})=>{
             console.log(error);
         }
     }
+
+    useEffect(()=>{
+        connectWallet()
+        getDeployer()
+      },[account,deployer])
+    
+      useEffect(()=>{
+        getContributorStatus()
+        getStakeholderStatus()
+      },[getContributorStatus,getStakeholderStatus])
+    
+      useEffect(()=>{
+        getTotalBalance()
+        getStakeholderBalance()
+        getContributorBalance()
+        proposals()
+      },[getTotalBalance,getStakeholderBalance,getContributorBalance,proposals])
     return(
         <GOVERNANCE_CONTEXT.Provider
         
@@ -260,7 +290,9 @@ const Government_provider =({children})=>{
             proposals,
             proposalsData,
             voting,
-            payBeneficiary
+            payBeneficiary,
+            getDeployer,
+            deployer
         }
         }
         >
