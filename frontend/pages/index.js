@@ -39,7 +39,8 @@ const Home =()=> {
         formData,
         proposals,
         proposalsData,
-        voting
+        voting,
+        payBeneficiary
       } = useContext(GOVERNANCE_CONTEXT)
 
   const modalRef = useRef(null) // boostrap modal
@@ -255,6 +256,9 @@ const Home =()=> {
                         <span className="visually-hidden">unread messages</span>
                       </span>
                      </button>
+                     <button className="btn btn-danger btn-sm position-relative" type='buttton' onClick={()=>payBeneficiary(i.id)}>
+                      pay beneficiary
+                     </button>
                   </div>
                   <div className="col-lg-4 d-flex voting-span justify-content-between order-1 order-lg-2 mb-5">
                     <p className='title'> Amount : <span>{i.amount}</span></p>
@@ -271,9 +275,7 @@ const Home =()=> {
 
       </div>
     </section>
-    <footer className='mt-5'>
-      <h3>copyright 2023</h3>
-    </footer>
+    
       </main>
      
     </>

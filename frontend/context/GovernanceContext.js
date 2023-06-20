@@ -206,8 +206,7 @@ const Government_provider =({children})=>{
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const tx = await contract.performVote(proposalId,vote)
-            console.log(tx);
-
+            await tx.wait(1)
 
         } catch (error) {
             if(error.message.includes('Time has already passed')){
@@ -222,6 +221,18 @@ const Government_provider =({children})=>{
         }
     }
 
+    const payBeneficiary =async(proposalId)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)            
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const tx = await contract.payBeneficiary(proposalId)
+            await tx.wait(1)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return(
         <GOVERNANCE_CONTEXT.Provider
         
@@ -247,7 +258,8 @@ const Government_provider =({children})=>{
             formData,
             proposals,
             proposalsData,
-            voting
+            voting,
+            payBeneficiary
         }
         }
         >
