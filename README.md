@@ -1,5 +1,7 @@
 # DAO
-A decentralized autonomous organisation that allows for decentralized running of organisation. Where users can contribute a certain amount to become a stakeholder.
+A decentralized autonomous organisation that allows for decentralized running of organisation.
+
+Where users can contribute a certain amount to become a stakeholder.
 
 Stakeholders can raise proposals and other stakeholders will vote on it within a stipulated perid of time (5 mins).
 
