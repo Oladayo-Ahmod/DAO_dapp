@@ -75,8 +75,8 @@ const Home =()=> {
   useEffect(()=>{
     connectWallet()
     getDeployer()
-    console.log(deployer,'  ',account);
-  },[account,deployer])
+    // console.log(deployer,'  ',account);
+  },[])
 
   useEffect(()=>{
     getContributorStatus()
