@@ -1,13 +1,29 @@
 # DAO
+<<<<<<< HEAD
 A decentralized autonomous organisation that allows for decentralized running of organisation.
 
 Where users can contribute a certain amount to become a stakeholder.
+=======
+>>>>>>> d71c67d34e1480fa6c9c937585e2d3027e0a161a
 
-Stakeholders can raise proposals and other stakeholders will vote on it within a stipulated perid of time (5 mins).
+# Overview
 
-After voting ends, payment is made to the beneficiary if there is more upvotes than downvotes. 
+DAO (Decentralized Autonomous Organization) is a platform that enables decentralized governance and operation of organizations. It allows users to become stakeholders by contributing a certain amount of resources.
 
-However, only deployer account can process the payment.
+Stakeholders within the DAO have the ability to raise proposals, which are then voted upon by other stakeholders. The voting period for each proposal is stipulated to be 5 minutes.
+
+Once the voting period ends, payment is made to the beneficiary if the number of upvotes exceeds the number of downvotes.
+
+However, it's important to note that only the deployer account has the authority to process payments within the DAO.
+
+# Functionality
+
+The DAO provides the following functionality:
+
+- Stakeholder Contributions: Users can contribute a specified amount to become stakeholders within the DAO.
+- Proposal Creation: Stakeholders can raise proposals for consideration by the DAO community.
+- Voting: Stakeholders are able to vote on proposed initiatives during the stipulated voting period of 5 minutes.
+- Payment Processing: After the voting period concludes, if a proposal receives more upvotes than downvotes, payment is processed to the designated beneficiary. This payment processing function is exclusively handled by the deployer account.
 
 ## Installations
 
