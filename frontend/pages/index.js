@@ -237,7 +237,7 @@ const Home =()=> {
               
               <div className='row' >
               { proposalsData? proposalsData.map(i=>(
-                 <div className={`${i.paid ? 'closed' : 'opened'} col tab-pane active filter-item`} >
+                 <div className={`${i.paid ? 'closed' : 'opened'} col tab-pane active filter-item`} key={i.id}>
                 <div className="row">
                   <div className="col-lg-8 details order-2 order-lg-1">
                     <h3 className='title'>{i.title.charAt(0).toUpperCase() + i.title.slice(1)}</h3>
