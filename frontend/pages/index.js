@@ -150,7 +150,7 @@ const Home =()=> {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                          <input className='form-control' onChange={e=> setAmount( e.target.value)} placeholder='1ETH and above to be a stakeholder'/>
+                          <input className='form-control' onChange={e=> setAmount( e.target.value)} placeholder='0.1ETH and above to be a stakeholder'/>
                         </div>
                         <div className="modal-footer">
                           <button type="button" className="btn btn-primary" disabled={disability} onClick={()=>Contribute(modalRef)}>Submit</button>
