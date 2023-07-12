@@ -1,10 +1,8 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Inter } from 'next/font/google'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { GOVERNANCE_CONTEXT } from "@/context/GovernanceContext";
-import {useRouter }from 'next/navigation'
 
 // import iso
 // import styles from '@/styles/Home.module.css'
